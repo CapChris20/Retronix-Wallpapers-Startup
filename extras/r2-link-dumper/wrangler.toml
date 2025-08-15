@@ -1,0 +1,12 @@
+name = "retronix-worker"
+type = "javascript"
+main = "public.js"
+
+account_id = "8e58aca7ee0c31de1c271519ec7ce66e"
+workers_dev = true
+compatibility_date = "2025-07-18"
+
+[[r2_buckets]]
+binding = "R2_BUCKET"                # This name must match what you use in code
+bucket_name = "retronix-live"        # The actual R2 bucket name
+preview_bucket_name = "retronix-live" # Use same unless previewing
