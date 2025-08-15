@@ -20,9 +20,9 @@ Retronix is a subscription-based wallpaper app designed to provide high-quality 
 * React (Frontend)
 * Firebase Auth & Firestore
 * Stripe (Checkout & Webhooks)
-* Tailwind CSS for styling
+* Regular CSS for styling
 * Netlify for hosting frontend
-* IDrive e2 for storage of live wallpapers
+* Cloudflare of live wallpapers
 * Supabase for live wallpaper URLs
 
 ## Getting Started
@@ -30,6 +30,7 @@ Retronix is a subscription-based wallpaper app designed to provide high-quality 
 ### Prerequisites
 
 * Node.js
+* ReactJS
 * npm
 * Firebase account
 * Stripe account
