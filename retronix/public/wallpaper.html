@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Retronix Live Wallpaper</title>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <style>
+    html, body, video {
+      margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden;
+      background: black;
+    }
+    video {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <video autoplay loop muted playsinline id="video"></video>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    let wallpaperUrl = params.get('url');
+    
+    if (wallpaperUrl) {
+      // Decode the URL once
+      let decodedUrl = decodeURIComponent(wallpaperUrl);
+      
+      console.log('Original URL:', wallpaperUrl);
+      console.log('Decoded URL:', decodedUrl);
+      
+      const video = document.getElementById('video');
+      
+      if (decodedUrl.endsWith('.mp4')) {
+        video.src = decodedUrl;
+        video.load();
+        video.play().catch(e => {
+          console.error('Error playing video:', e);
+          document.body.innerHTML = '<p style="color:white;text-align:center;margin-top:40vh;font-size:2rem;">Error loading video.</p>';
+        });
+      } else {
+        document.body.innerHTML = `<img src="${decodedUrl}" alt="Wallpaper" style="width:100vw;height:100vh;object-fit:cover;display:block;" />`;
+      }
+    } else {
+      document.body.innerHTML = '<p style="color:white;text-align:center;margin-top:40vh;font-size:2rem;">No wallpaper URL provided.</p>';
+    }
+  </script>
+</body>
+</html>

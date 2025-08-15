@@ -1,0 +1,4028 @@
+/* =========================
+   GLOBAL RESET & FONTS
+   ========================= */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap'); /* Imports the 'Press Start 2P' pixel-style font from Google Fonts. */
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap'); /* Imports the 'Righteous' font, a bold display font, from Google Fonts. */
+
+/* =========================
+   SCALING SYSTEM FOR CONSISTENT SIZES
+   ========================= */
+:root {
+  /* Base font size that scales with viewport width for consistent scaling */
+  font-size: clamp(14px, 1vw, 16px);
+  
+  /* Custom properties for consistent scaling */
+  --scale-factor: clamp(0.8, 1vw / 100, 1.2);
+  --base-spacing: clamp(0.5rem, 1vw, 1rem);
+  --large-spacing: clamp(1rem, 2vw, 2rem);
+  
+  /* Responsive font sizes */
+  --text-xs: clamp(0.6rem, 1.5vw, 0.8rem);
+  --text-sm: clamp(0.8rem, 2vw, 1rem);
+  --text-base: clamp(1rem, 2.5vw, 1.2rem);
+  --text-lg: clamp(1.2rem, 3vw, 1.5rem);
+  --text-xl: clamp(1.5rem, 4vw, 2rem);
+  --text-2xl: clamp(2rem, 5vw, 2.5rem);
+  --text-3xl: clamp(2.5rem, 6vw, 3.5rem);
+  --text-4xl: clamp(3rem, 7vw, 4.5rem);
+  --text-5xl: clamp(4rem, 8vw, 6rem);
+  --text-6xl: clamp(5rem, 10vw, 8rem);
+}
+
+/* =========================
+   GLOBAL RESET
+   ========================= */
+* { /* This is a universal selector, it applies the following styles to every single element on the page. */
+  margin: 0; /* Resets the default outer spacing (margin) of all elements to zero. */
+  padding: 0; /* Resets the default inner spacing (padding) of all elements to zero. */
+  box-sizing: border-box; /* Changes the box model so that padding and border are included in the element's total width and height. */
+}
+
+body { /* Selects the <body> element, which contains all the visible content of the page. */
+  font-family: 'Press Start 2P', monospace; /* Sets the default font for the entire page to 'Press Start 2P', with 'monospace' as a fallback. */
+  font-size: var(--text-base);
+  line-height: 1.6;
+  overflow-x: hidden;
+  background: #0a001a; /* Solid dark background, no image */
+  min-height: 100vh;
+  color: #fff; /* Sets the default text color for the page to white. */
+  height: auto !important;
+  overflow: auto !important;
+}
+
+/* =========================
+   BACKGROUND VIDEO
+   ========================= */
+.bg-video { /* Styles for the full-screen background video */
+  position: fixed; /* Fix video to viewport so it stays in place */
+  top: 0; /* Align video to top of viewport */
+  left: 0; /* Align video to left of viewport */
+  width: 100vw; /* Make video span the full viewport width */
+  height: 100vh; /* Make video span the full viewport height */
+  object-fit: cover; /* Ensure video covers the area without distortion */
+  z-index: -1; /* Place video behind all other content */
+  pointer-events: none; /* Allow clicks to pass through video */
+}
+
+/* =========================
+   NAVBAR
+   ========================= */
+/* === BASE STYLES === */
+/* === RETRONIX NAVBAR (MODERN, RESPONSIVE, NEON) === */
+.retronix-navbar {
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1200;
+  background: linear-gradient(90deg, #1a002b 0%, #bc1577 25%, #881374 50%, #8c1c8cf1 75%, #27123e 100%);
+  background-size: 400% 100%;
+  border-bottom: 2px solid #ff00ff;
+  box-shadow: 0 0 18px #ff00ff, 0 0 24px #00ffff;
+  font-family: 'Press Start 2P', monospace;
+  animation: navbarGradientMove 3s linear infinite;
+}
+
+@keyframes navbarGradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+
+.retronix-navbar-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0.7rem 2.2rem 0.7rem 1.2rem;
+  position: relative;
+}
+
+.retronix-navbar-links {
+  display: flex;
+  gap: 2.2rem;
+  align-items: center;
+  transition: none;
+}
+
+.retronix-nav-link {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 2rem;
+  text-decoration: none;
+  line-height: 1.7;
+  text-align: center;
+  padding: 1.2rem;
+  margin-top: 0.5rem;
+  border-radius: 10px;
+  background-clip: padding-box;
+  color: #ff99cc;
+  letter-spacing: 0.6px;
+text-shadow:
+  1px 1px rgb(191, 0, 255),
+    1px 2px rgb(191, 0, 255),
+      1px 3px rgb(191, 0, 255),
+        1px 4px rgb(191, 0, 255),
+          1px 5px rgb(191, 0, 255),
+            1px 6px rgb(191, 0, 255);
+  transition: background 0.18s, color 0.18s, box-shadow 0.18s;
+  position: relative;
+  display: inline-block;
+}
+
+.retronix-nav-link:hover,
+.retronix-nav-link.active {
+  color: #ff00d4;
+  background: rgba(26,0,43,0.5);
+  text-shadow: 0 0 6px #ff00d4, 2px 2px 1px #000;
+  box-shadow: 0 0 8px #ff00ff;
+}
+
+/* Hamburger styles */
+.retronix-hamburger {
+  display: none;
+  background: none;
+  border: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+  margin-right: 0.5rem;
+  z-index: 1300;
+  position: relative;
+}
+.retronix-hamburger span {
+  display: block;
+  width: 28px;
+  height: 4px;
+  margin: 4px 0;
+  background: #ff00d4;
+  border-radius: 2px;
+  transition: 0.3s;
+  box-shadow: 0 0 8px #ff00ff;
+}
+
+.scroll-header {
+  font-family: 'Press Start 2P', monospace; /* keeps your retro pixel font */
+  font-size: var(--text-base); /* readable size */
+  line-height: 1.7; /* line spacing */
+  text-align: center; /* center text */
+  padding: var(--base-spacing); /* inner spacing */
+  background: rgba(0, 0, 0, 0.65); /* dark translucent background */
+  border-radius: 10px; /* rounded corners */
+  background-clip: padding-box; /* ensures border does not bleed */
+  border: 1.5px solid #ff00ff; /* neon magenta border */
+  box-shadow: 0 0 12px rgba(255, 0, 255, 0.5); /* neon glow */
+  color: #ff99cc; /* pink neon text */
+  letter-spacing: 0.6px; /* slight letter spacing */
+  text-shadow: /* neon layered shadow */
+    1px 1px rgb(191, 0, 255),
+    1px 2px rgb(191, 0, 255),
+    1px 3px rgb(191, 0, 255),
+    1px 4px rgb(191, 0, 255),
+    1px 5px rgb(191, 0, 255),
+    1px 6px rgb(191, 0, 255);
+  position: relative; /* allow positional adjustment */
+  top: -5vh; /* move upward above the car without breaking responsiveness */
+  margin: 0 auto; /* center horizontally if needed */
+  max-width: 80%; /* ensure it does not overflow on mobile */
+}
+
+/* =========================
+   FLOATING LOGO
+   ========================= */
+.brand-logo { /* Logo image in navbar */
+  width: 160px; /* Set logo width */
+  height: auto; /* Maintain aspect ratio */
+  margin-bottom: 2rem; /* Space below logo */
+  animation: float 3s ease-in-out infinite; /* Floating animation for logo */
+  filter: drop-shadow(0 0 18px #FF4DDE); /* Neon pink shadow for logo */
+}
+
+@keyframes float { /* Animation for floating logo */
+  0% { transform: translateY(0); } /* Start at original position */
+  50% { transform: translateY(-8px); } /* Move logo up */
+  100% { transform: translateY(0); } /* Return to original position */
+}
+
+/* =========================
+   PAGE CONTAINER
+   ========================= */
+.container { /* Main content container for each page */
+  position: relative; /* Position relative for stacking context */
+  z-index: 2; /* Place above background video */
+  padding-top: 10vh; /* Space below navbar */
+  margin-top: 10vh;
+  padding-bottom: 4rem; /* Space above footer */
+  text-align: center; /* Center all text inside */
+  flex: 1 0 auto; /* Allow container to grow/shrink */
+  display: flex; /* Use flexbox for layout */
+  flex-direction: column; /* Stack children vertically */
+  min-height: 100vh; /* Ensure container fills viewport height */
+}
+
+/* =========================
+   HERO SECTION (HOMEPAGE)
+   ========================= */
+.home-wrapper {
+  position: relative;
+  padding-top: 0;  /* Keep this */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column; /* So hero and other sections stack vertically */
+  align-items: center;
+  justify-content: center; /* Optional if you want vertical centering too */
+}
+
+.hero {
+  position: relative; /* or just remove position entirely */
+  top: 0;             /* reset this */
+  left: auto;
+  transform: none;
+  width: 100%;
+  padding-top: 1.1rem;  /* add padding to clear the fixed navbar */
+  text-align: center;
+  margin-top: 7.5vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1;
+}
+/* =========================
+   TYPOGRAPHY HEADERS
+   ========================= */
+.brand-name { /* Brand name text */
+  font-weight: bold; /* Bold text */
+  text-transform: uppercase; /* Uppercase */
+  background-image: linear-gradient(
+    -225deg, /* Gradient angle */
+    #17bcda 0%, /* Blue start */
+    #682da7 29%, /* Purple */
+    #eb13ff 67%, /* Pink */
+    #a600ff90 100% /* Faded purple end */
+  );
+  background-size: 200% auto; /* Animate gradient */
+  background-clip: text; /* Clip to text */
+  -webkit-background-clip: text; /* Safari clip */
+  -webkit-text-fill-color: transparent; /* Safari text fill */
+  text-decoration: none; /* No underline */
+  font-size: 7rem;
+  margin-top: 2.5rem !important;
+  margin-bottom: 0.5rem; /* Space below */
+  padding: 0.2rem 1rem; /* Padding */
+  animation: textclip 2s linear infinite; /* Gradient animation */
+  transition: transform 0.2s ease; /* Smooth scale */
+  z-index: 10; /* Above bg */
+  display: block; /* Block element */
+  width: 100%; /* Full width */
+  text-align: center; /* Center text */
+}
+.brand-name:hover { /* Brand name hover */
+  transform: scale(1.05); /* Slightly bigger */
+}
+
+@keyframes textclip { /* Gradient animation */
+  to {
+    background-position: 200% center; /* Move gradient */
+  }
+}
+
+
+/* --- Remove global fixed header styles from .header-bg --- */
+.header-bg {
+  position: relative;
+  top: unset;
+  left: unset;
+  width: 100%;
+  z-index: 1000;
+  background: rgba(0,0,0,0.82);
+  border-radius: 60px;
+  box-shadow: 0 0 12px #ff00ff, 0 0 24px #ff00ff;
+  margin: 0 auto 1.2rem auto;
+  padding: 0.2rem 0;
+  text-align: center;
+}
+
+.slogan {
+  font-family: 'Press Start 2P', monospace; /* Slogan font */
+  font-size: var(--text-base); /* Slogan size */
+   color: #ff99cc;
+  text-shadow: 2px 2px 2px rgb(191, 0, 255);
+  text-align: center; /* Center slogan */
+  letter-spacing: 1.2px; /* Space letters */  
+  margin-top: 1.5rem; /* Space above */
+  text-shadow:
+    0 0 2px #ff00ff, /* Pink shadow */
+    0 0 6px #ff00ff, /* More shadow */
+    0 0 10px #aa00ff; /* Purple shadow */
+  background: rgba(0, 0, 0, 0.65); /* Slogan bg */
+  padding: var(--base-spacing); /* Slogan padding */
+  border-radius: 10px; /* Rounded corners */
+  display: inline-block; /* Inline block */
+  line-height: 1.75; /* Line height */
+  max-width: 800px; /* Responsive max width */
+ box-shadow: 0 0 12px #ff00ff, 0 0 24px #ae00ff; /* Neon box shadow */
+}
+
+/* =========================
+   BOUNCING SCROLL ICON
+   ========================= */
+.scroll-icon {
+  margin-top: 3rem; /* Adds 3rem of space above the icon. */
+  cursor: pointer; /* Changes the mouse cursor to a pointer to indicate it's clickable. */
+  animation: bounce 1.5s infinite; /* Applies a 1.5s, infinitely-looping animation named 'bounce'. */
+}
+
+@keyframes bounce { /* Defines the animation named 'bounce'. */
+  0%, 100% { transform: translateY(0); } /* The starting and ending state of the bounce. */
+  50% { transform: translateY(10px); } /* The middle state of the bounce, moving the icon down by 10px. */
+}
+
+/* =========================
+   WALLPAPER PREVIEW SECTION
+   ========================= */
+.wallpaper-preview-section {
+  position: relative; /* Relative pos */
+  z-index: 1; /* Below hero */
+  margin-top: 60vh; /* Space from top */
+  padding: 2rem 1rem; /* Padding */
+  text-align: center; /* Center text */
+}
+
+
+.wallpaper-scroll {
+  display: flex; /* Flexbox */
+  flex-wrap: wrap; /* Wrap items */
+  justify-content: center; /* Center items */
+  align-items: flex-start; /* Align to top */
+  gap: 2rem; /* Space between */
+  padding: 2rem 1rem; /* Padding */
+  scroll-snap-type: x mandatory; /* Snap scroll */
+  min-height: 300px; /* Min height */
+}
+
+
+
+.preview-title {
+  font-weight: bold; /* Bold text */
+  background-image: linear-gradient(-225deg, #b700cc, #f600af, #ffeb01, #42c3d0, #513aee);
+  background-size: 200% auto; /* Animate gradient */
+  background-clip: text; /* Clip to text */
+  -webkit-background-clip: text; /* Safari clip */
+  -webkit-text-fill-color: transparent; /* Safari text fill */
+  text-decoration: none; /* No underline */
+  font-size: var(--text-2xl); /* Large text */
+  padding: 0.5rem 1rem; /* Padding */
+padding-top: 8px;
+}
+
+@keyframes shimmerPink {
+  0% { background-position: 0% 50%; } /* Start shimmer */
+  100% { background-position: 100% 50%; } /* End shimmer */
+}
+
+ .countdown-timer {
+  font-weight: bold; /* Bold text */
+  background-image: linear-gradient(-225deg, #b700cc, #f600af, #ffeb01, #42c3d0, #513aee);
+  background-size: 200% auto; /* Animate gradient */
+  background-clip: text; /* Clip to text */
+  -webkit-background-clip: text; /* Safari clip */
+  -webkit-text-fill-color: transparent; /* Safari text fill */
+  text-decoration: none; /* No underline */
+  font-size: var(--text-2xl); /* Large text */
+  padding: 0.5rem 1rem; /* Padding */
+padding-top: 8px;
+}
+
+
+.view-more-button {
+ background: linear-gradient(90deg, #bc1577, #27123e);
+  color: #fff; /* Button text color */
+  border-radius: 8px; /* Rounded corners */
+  border: none; /* No border */
+  cursor: pointer; /* Pointer cursor */
+  font-family: 'Press Start 2P', monospace; /* Button font */
+  text-transform: uppercase; /* Uppercase text */
+  padding: var(--base-spacing); /* Button padding */
+  font-size: var(--text-sm); /* Button font size */
+  display: inline-block; /* Inline block */
+  margin-top: 8vh; /* Space above */
+  text-decoration: none; /* No underline */
+  box-shadow: 0 0 24px #ff00cc, 0 0 8px #a259f7; /* Neon box shadow */
+  text-shadow: 0 0 12px #ff00cc, 0 0 4px #a259f7; /* Neon text shadow */
+  background-size: 200% 200%; /* For shimmer animation */
+  animation: shimmerMagenta 2.5s linear infinite; /* Shimmer animation */
+  position: relative; /* For layering */
+  overflow: hidden; /* Hide overflow */
+  z-index: 1; /* Layering */
+  transition: transform 0.18s cubic-bezier(.4,2,.6,1), filter 0.18s cubic-bezier(.4,2,.6,1), box-shadow 0.18s cubic-bezier(.4,2,.6,1); /* Smooth transitions */
+  position: relative;
+  z-index: 10;
+  pointer-events: auto;
+}
+@keyframes shimmerMagenta {
+  0% { background-position: 0% 50%; } /* Start shimmer */
+  100% { background-position: 100% 50%; } /* End shimmer */
+}
+.view-more-button:hover {
+  filter: brightness(1.18) saturate(1.2); /* Brighter on hover */
+  transform: scale(1.09) rotate(1deg); /* Enlarge and rotate on hover */
+  box-shadow: 0 0 32px #ff00cc, 0 0 16px #a259f7; /* Stronger glow on hover */
+}
+
+/* =========================
+   About Us Section
+   ========================= */
+.about-cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+  justify-items: center;
+  align-items: start;
+  padding: 3rem 2rem;
+  z-index: 2;
+  position: relative;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.about-card {
+  width: 100%;
+  max-width: 600px;
+  min-height: 360px;
+  padding: 2rem;
+  background: rgba(0, 0, 0, 0.6);
+  border: 2px solid #ff00ff;
+  border-radius: 20px;
+  box-shadow: 0 0 12px #ff00ff, 0 0 24px #ff00ff;
+  transition: transform 0.3s ease;
+}
+
+.about-card:hover {
+  transform: translateY(-10px);
+}
+
+.about-header {
+font-family: 'Press Start 2P', monospace;
+font-weight: bold; /* Bold text */
+  background-image: linear-gradient(
+    -225deg,
+    #daad17 0%,
+    #a72d60 29%,
+    #eb13ff 67%,
+    #a600ff90 100%
+  );
+  background-size: 200% auto; /* Animate gradient */
+  background-clip: text; /* Clip to text */
+  -webkit-background-clip: text; /* Safari clip */
+  -webkit-text-fill-color: transparent; /* Safari text fill */
+  text-decoration: none; /* No underline */
+  font-size: 2.10rem; /* Large text */
+  padding: 0.5rem 1rem; /* Padding */
+   animation: textclip 2s linear infinite; /* Gradient animation */
+  transition: transform 0.2s ease; /* Smooth scale */
+}
+
+.about-info {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 1.5rem;
+  line-height: 1.7;
+  text-align: center;
+  padding: 1.2rem;
+  margin-top: 0.5rem;
+
+  background: rgba(0, 0, 0, 0.65); /* dark translucent background */
+  border-radius: 10px;
+  background-clip: padding-box;
+  border: 1.5px solid #ff00ff;
+  box-shadow: 0 0 12px rgba(255, 0, 255, 0.5);
+  color: #ff99cc;
+  letter-spacing: 0.6px;
+text-shadow:
+  1px 1px rgb(191, 0, 255),
+    1px 2px rgb(191, 0, 255),
+      1px 3px rgb(191, 0, 255),
+        1px 4px rgb(191, 0, 255),
+          1px 5px rgb(191, 0, 255),
+            1px 6px rgb(191, 0, 255);
+
+}
+
+/* =========================
+FAQS Section
+   ========================= */
+.faqs-column {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  padding: 4rem 2rem;
+  align-items: center;
+}
+
+.faqs-card {
+  width: 100%;
+  max-width: 820px;
+  min-width: 320px;
+  min-height: 160px;
+  padding: 2.5rem 2rem;
+  background: rgba(0, 0, 0, 0.6);
+  border: 2px solid #ff00ff;
+  border-radius: 20px;
+  box-shadow: 0 0 12px #ff00ff, 0 0 24px #ff00ff;
+  transition: transform 0.3s ease;
+  font-family: 'Press Start 2P', monospace;
+  margin: 0 auto 2.5rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.faqs-card:hover {
+  transform: translateY(-10px);
+}
+
+.question {
+  font-family: 'Press Start 2P', monospace;
+font-weight: bold; /* Bold text */
+  background-image: linear-gradient(
+    -225deg,
+    #daad17 0%,
+    #a72d60 29%,
+    #eb13ff 67%,
+    #a600ff90 100%
+  );
+  background-size: 200% auto; /* Animate gradient */
+  background-clip: text; /* Clip to text */
+  -webkit-background-clip: text; /* Safari clip */
+  -webkit-text-fill-color: transparent; /* Safari text fill */
+  text-decoration: none; /* No underline */
+  font-size: 1.5rem; /* Large text */
+  padding: 0.5rem 1rem; /* Padding */
+}
+
+.faqs-card .answer, .answer {
+ font-family: 'Press Start 2P', monospace;
+  font-size: 1.5rem;
+  line-height: 1.7;
+  text-align: center;
+  padding: 1.2rem;
+  margin-top: 0.5rem;
+
+  background: rgba(0, 0, 0, 0.65); /* dark translucent background */
+  border-radius: 10px;
+  background-clip: padding-box;
+  border: 1.5px solid #ff00ff;
+  box-shadow: 0 0 12px rgba(255, 0, 255, 0.5);
+  color: #ff99cc;
+  letter-spacing: 0.6px;
+text-shadow: 1px 2px 3px rgb(191, 0, 255) !important;
+
+}
+
+@media (max-width: 900px) {
+  .faqs-card {
+    max-width: 98vw !important;
+    padding: 1.5rem 0.5rem !important;
+  }
+  .question {
+    font-size: 1.4rem !important;
+  }
+  .faqs-card .answer, .answer {
+    font-size: 1.1rem !important;
+  }
+}
+
+/* =========================
+  Contact Us Section
+   ========================= */
+/* === Global container for Contact page === */
+/* === Contact Page Header === */
+.contact-name {
+  font-family: 'Press Start 2P', monospace;
+  text-transform: uppercase;
+  background-image: linear-gradient(
+    -225deg,
+    #17bcda 0%,
+    #682da7 29%,
+    #eb13ff 67%,
+    #a600ff90 100%
+  );
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-decoration: none;
+  font-size: var(--text-4xl);
+  padding: 0.5rem 1rem;
+  animation: textclip 2s linear infinite;
+  transition: transform 0.2s ease;
+}
+
+/* --- Remove all top margin/padding from the contact header --- */
+.header-bg,
+.contact-name {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* === Section Layout === */
+.contact-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+  gap: 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* === Neon Card Wrapper (used by the button) === */
+.contact-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  flex: 1 1 440px;
+  border-radius: 16px;
+  background: linear-gradient(90deg, #bc1577, #27123e);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 12px #ff00ff, 0 0 24px #ff00ff;
+  max-width: 650px;
+  max-height: 500px;
+}
+
+/* === Send Message Button === */
+.contact-btn {
+  background: linear-gradient(120deg, #ff00cc 0%, #2d006e 100%);
+  color: #fff;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-family: 'Press Start 2P', monospace;
+  text-transform: uppercase;
+  padding: var(--base-spacing);
+  font-size: var(--text-sm);
+  text-decoration: none;
+  box-shadow: 0 0 24px #ff00cc, 0 0 8px #00fff7;
+  text-shadow: 0 0 12px #ff00cc, 0 0 4px #00fff7;
+  transition: transform 0.18s cubic-bezier(.4,2,.6,1),
+              filter 0.18s cubic-bezier(.4,2,.6,1),
+              box-shadow 0.18s cubic-bezier(.4,2,.6,1);
+  animation: flickerNeon 2.2s infinite alternate;
+}
+
+.contact-btn:hover {
+  background-color: #960e50;
+}
+
+@keyframes flickerNeon {
+  0%, 100% { filter: brightness(1); }
+  45% { filter: brightness(1.18); }
+  50% { filter: brightness(0.85); }
+  55% { filter: brightness(1.22); }
+  60% { filter: brightness(0.95); }
+}
+
+/* === Info Box === */
+.contact-info {
+  flex: 1 1 440px;
+  max-width: 625px;
+  max-height: 400px;
+  padding: 2rem;
+  border-radius: 16px;
+  background: linear-gradient(90deg, #bc1577, #27123e);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 12px #ff00ff, 0 0 24px #ff00ff;
+  text-align: center;
+  font-size: 1.5rem;
+  line-height: 1.6;
+}
+
+.contact-info a {
+  color: #ff99cc;
+  letter-spacing: 0.6px;
+  text-shadow: 4px 3px 3px rgb(191, 0, 255);
+  font-size: 1.2rem;
+  transition: color 0.3s ease;
+}
+
+.contact-info a:hover {
+  color: #ff69b4;
+}
+
+/* === Info Text === */
+.moreinfo {
+  color: #99faff;
+  letter-spacing: 0.6px;
+  text-shadow: 4px 3px 3px rgb(191, 0, 255);
+  transition: color 0.3s ease;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+
+/* =========================
+  Account Section
+   ========================= */
+
+.ac-info{
+    font-family: 'Press Start 2P', monospace;
+  font-weight: bold; /* Bold text */
+  text-transform: uppercase; /* Uppercase */
+  background-image: linear-gradient(
+    -225deg, /* Gradient angle */
+    #43b7cc 0%, /* Blue start */
+    #a72d84 29%, /* Purple */
+    #eb13ff 67%, /* Pink */
+    #8e2ac4c1 100% /* Faded purple end */
+  );
+  background-size: 200% auto; /* Animate gradient */
+  background-clip: text; /* Clip to text */
+  -webkit-background-clip: text; /* Safari clip */
+  -webkit-text-fill-color: transparent; /* Safari text fill */
+  text-decoration: none; /* No underline */
+ font-size: var(--text-2xl);
+  padding: 0.5rem 1rem; /* Padding */
+  animation: textclip 2s linear infinite; /* Gradient animation */
+  transition: transform 0.2s ease; /* Smooth scale */
+}
+
+.email{
+color: #ff99cc;
+text-shadow: 4px 3px 3px rgb(191, 0, 255);
+font-size: 1.18rem;
+}
+
+.password{
+color: #ff99cc;
+text-shadow: 4px 3px 3px rgb(191, 0, 255);
+font-size: 1.18rem;
+}
+
+.email-input{
+background: rgba(0, 0, 0, 0.5);
+color: #f8c971;
+  text-shadow: 4px 3px 3px rgb(191, 0, 255);
+  border-radius: 8px; /* Rounded corners */
+  border: none; /* No border */
+  cursor: pointer; /* Pointer cursor */
+  font-family: 'Press Start 2P', monospace; /* Button font */
+  text-transform: uppercase; /* Uppercase text */
+  padding: 0.75rem 1.25rem; /* Button padding */
+  font-size: 1rem; /* Button font size */
+  display: inline-block; /* Inline block */
+  margin-top: 0.8rem; /* Space above */
+  text-decoration: none; /* No underline */
+  box-shadow: 0 0 18px #a259f7cc; /* Neon box shadow */
+  text-shadow: 0 0 8px #a259f7, 0 0 2px #ff00cc; /* Neon text shadow */
+  transition: transform 0.18s cubic-bezier(.4,2,.6,1), filter 0.18s cubic-bezier(.4,2,.6,1), box-shadow 0.18s cubic-bezier(.4,2,.6,1); /* Smooth transitions */
+  animation: flickerPurple 2.8s infinite alternate; /* Flicker animation */
+}
+
+.password-input{
+background: rgba(0, 0, 0, 0.5);
+color: #f8c971;
+  text-shadow: 4px 3px 3px rgb(191, 0, 255);
+  border-radius: 8px; /* Rounded corners */
+  border: none; /* No border */
+  cursor: pointer; /* Pointer cursor */
+  font-family: 'Press Start 2P', monospace; /* Button font */
+  text-transform: uppercase; /* Uppercase text */
+  padding: 0.75rem 1.25rem; /* Button padding */
+  font-size: 1rem; /* Button font size */
+  display: inline-block; /* Inline block */
+  margin-top: 0.8rem; /* Space above */
+  text-decoration: none; /* No underline */
+  box-shadow: 0 0 18px #a259f7cc; /* Neon box shadow */
+  text-shadow: 0 0 8px #a259f7, 0 0 2px #ff00cc; /* Neon text shadow */
+  transition: transform 0.18s cubic-bezier(.4,2,.6,1), filter 0.18s cubic-bezier(.4,2,.6,1), box-shadow 0.18s cubic-bezier(.4,2,.6,1); /* Smooth transitions */
+  animation: flickerPurple 2.8s infinite alternate; /* Flicker animation */
+}
+
+.logout-btn{
+  background: linear-gradient(120deg, #a259f7 0%, #ff00cc 100%); /* Button background gradient */
+  color: #fff; /* Button text color */
+  border-radius: 8px; /* Rounded corners */
+  border: none; /* No border */
+  cursor: pointer; /* Pointer cursor */
+  font-family: 'Press Start 2P', monospace; /* Button font */
+  text-transform: uppercase; /* Uppercase text */
+  padding: 0.75rem 1.25rem; /* Button padding */
+  font-size: 0.75rem; /* Button font size */
+  display: inline-block; /* Inline block */
+  margin-top: 0.8rem; /* Space above */
+  text-decoration: none; /* No underline */
+  box-shadow: 0 0 18px #a259f7cc; /* Neon box shadow */
+  text-shadow: 0 0 8px #a259f7, 0 0 2px #ff00cc; /* Neon text shadow */
+  transition: transform 0.18s cubic-bezier(.4,2,.6,1), filter 0.18s cubic-bezier(.4,2,.6,1), box-shadow 0.18s cubic-bezier(.4,2,.6,1); /* Smooth transitions */
+  animation: flickerPurple 2.8s infinite alternate; /* Flicker animation */
+}
+
+.welcome-user{
+  font-family: 'Press Start 2P', monospace; /* Retro pixel font */
+  font-size: 1.4rem; /* Medium-large size */
+  background-image: rgb(182, 20, 74);
+  text-shadow: 1px 2px 2px cyan;
+  margin-bottom: 1rem; /* Space below the brand title */
+}
+
+.google-login {
+  background: linear-gradient(120deg, #a259f7 0%, #ff00cc 100%); /* Button background gradient */
+  color: #fff; /* Button text color */
+  border-radius: 8px; /* Rounded corners */
+  border: none; /* No border */
+  cursor: pointer; /* Pointer cursor */
+  font-family: 'Press Start 2P', monospace; /* Button font */
+  text-transform: uppercase; /* Uppercase text */
+  padding: 0.75rem 1.25rem; /* Button padding */
+  font-size: 0.75rem; /* Button font size */
+  display: inline-block; /* Inline block */
+  margin-top: 0.8rem; /* Space above */
+  text-decoration: none; /* No underline */
+  box-shadow: 0 0 18px #a259f7cc; /* Neon box shadow */
+  text-shadow: 0 0 8px #a259f7, 0 0 2px #ff00cc; /* Neon text shadow */
+  transition: transform 0.18s cubic-bezier(.4,2,.6,1), filter 0.18s cubic-bezier(.4,2,.6,1), box-shadow 0.18s cubic-bezier(.4,2,.6,1); /* Smooth transitions */
+  animation: flickerPurple 2.8s infinite alternate; /* Flicker animation */
+}
+@keyframes flickerPurple {
+  0%, 100% { filter: brightness(1); } /* Normal brightness */
+  45% { filter: brightness(1.12); } /* Flicker brighter */
+  50% { filter: brightness(0.85); } /* Flicker dimmer */
+  55% { filter: brightness(1.18); } /* Flicker brighter */
+  60% { filter: brightness(0.95); } /* Flicker dimmer */
+}
+.google-login:hover {
+  filter: brightness(1.18) saturate(1.2); /* Brighter on hover */
+  transform: scale(1.07); /* Enlarge on hover */
+}
+
+.email-login{
+   background: linear-gradient(120deg, #ff00cc 0%, #2d006e 100%); /* Button background gradient */
+  color: #fff; /* Button text color */
+  border-radius: 8px; /* Rounded corners */
+  border: none; /* No border */
+  cursor: pointer; /* Pointer cursor */
+  font-family: 'Press Start 2P', monospace; /* Button font */
+  text-transform: uppercase; /* Uppercase text */
+  padding: 0.75rem 1.25rem; /* Button padding */
+  font-size: 0.75rem; /* Button font size */
+  display: inline-block; /* Inline block */
+  margin-top: 0.8rem; /* Space above */
+  text-decoration: none; /* No underline */
+  box-shadow: 0 0 24px #ff00cc, 0 0 8px #00fff7; /* Neon box shadow */
+  text-shadow: 0 0 12px #ff00cc, 0 0 4px #00fff7; /* Neon text shadow */
+  position: relative; /* For layering */
+  overflow: hidden; /* Hide overflow */
+  z-index: 1; /* Layering */
+  transition: transform 0.18s cubic-bezier(.4,2,.6,1), filter 0.18s cubic-bezier(.4,2,.6,1), box-shadow 0.18s cubic-bezier(.4,2,.6,1); /* Smooth transitions */
+  animation: flickerNeon 2.2s infinite alternate; /* Flicker animation */
+}
+  
+/* =========================
+   PRICING, FAQ, GRID, CONTACT, ABOUT, ACCOUNT HEADERS
+   ========================= */
+
+.faqs-name{
+  font-family: 'Press Start 2P', monospace;
+  font-weight: bold; /* Bold text */
+  text-transform: uppercase; /* Uppercase */
+  background-image: linear-gradient(
+    -225deg,
+    #17bcda 0%,
+    #682da7 29%,
+    #eb13ff 67%,
+    #a600ff90 100%
+  );
+  background-size: 200% auto; /* Animate gradient */
+  background-clip: text; /* Clip to text */
+  -webkit-background-clip: text; /* Safari clip */
+  -webkit-text-fill-color: transparent; /* Safari text fill */
+  text-decoration: none; /* No underline */
+  font-size: clamp(3rem, 7vw, 4rem); /* Responsive font size */
+  padding: 0.5rem 1rem; /* Padding */
+  animation: textclip 2s linear infinite; /* Gradient animation */
+  transition: transform 0.2s ease; /* Smooth scale */
+}
+
+.grid-name{
+    font-family: 'Press Start 2P', monospace;
+  font-weight: bold; /* Bold text */
+  text-transform: uppercase; /* Uppercase */
+  background-image: linear-gradient(
+    -225deg,
+    #17bcda 0%,
+    #682da7 29%,
+    #eb13ff 67%,
+    #a600ff90 100%
+  );
+  background-size: 200% auto; /* Animate gradient */
+  background-clip: text; /* Clip to text */
+  -webkit-background-clip: text; /* Safari clip */
+  -webkit-text-fill-color: transparent; /* Safari text fill */
+  text-decoration: none; /* No underline */
+  font-size: clamp(2.5rem, 6vw, 3.5rem); /* Responsive font size */
+  padding: 0.5rem 1rem; /* Padding */
+  animation: textclip 2s linear infinite; /* Gradient animation */
+  transition: transform 0.2s ease; /* Smooth scale */
+}
+
+.contact-name{
+   font-family: 'Press Start 2P', monospace; /* Slogan font */
+  text-transform: uppercase; /* Uppercase */
+  background-image: linear-gradient(
+    -225deg,
+    #17bcda 0%,
+    #682da7 29%,
+    #eb13ff 67%,
+    #a600ff90 100%
+  );
+  background-size: 200% auto; /* Animate gradient */
+  background-clip: text; /* Clip to text */
+  -webkit-background-clip: text; /* Safari clip */
+  -webkit-text-fill-color: transparent; /* Safari text fill */
+  text-decoration: none; /* No underline */
+  font-size: clamp(3.5rem, 8vw, 5.5rem); /* Responsive font size */
+  padding: 0.5rem 1rem; /* Padding */
+  animation: textclip 2s linear infinite; /* Gradient animation */
+  transition: transform 0.2s ease; /* Smooth scale */
+  margin-top: 15vh;
+}
+
+
+.account-card {
+  max-width: 600px;
+  margin: 5rem auto 2rem auto; /* increased top margin for spacing from nav */
+  background: rgba(0, 0, 0, 0.65);
+  padding: 2.5rem;
+  border-radius: 16px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 18px #ff00ccaa;
+  text-align: center;
+  z-index: 5;
+  min-height: auto !important; /* Allow natural height */
+  overflow: visible !important; /* Ensure content is not cut off */
+  height: auto !important; /* Let content determine height */
+  max-height: none !important; /* Remove any max-height constraints */
+}
+
+.about-name,
+.account-name{
+  font-family: 'Press Start 2P', monospace;
+  font-weight: bold; /* Bold text */
+  text-transform: uppercase; /* Uppercase */
+  background-image: linear-gradient(
+    -225deg, /* Gradient angle */
+    #43b7cc 0%, /* Blue start */
+    #a72d84 29%, /* Purple */
+    #eb13ff 67%, /* Pink */
+    #8e2ac4c1 100% /* Faded purple end */
+  );
+  background-size: 200% auto; /* Animate gradient */
+  background-clip: text; /* Clip to text */
+  -webkit-background-clip: text; /* Safari clip */
+  -webkit-text-fill-color: transparent; /* Safari text fill */
+  text-decoration: none; /* No underline */
+  font-size: clamp(3.5rem, 8vw, 5rem);
+  padding: 0.5rem 1rem; /* Padding */
+  animation: textclip 2s linear infinite; /* Gradient animation */
+  transition: transform 0.2s ease; /* Smooth scale */
+}
+
+.wallpapers-page, .container {
+  overflow: visible !important;
+  height: auto !important;
+  margin-top: -3 !important;
+}
+
+.wp-container {
+  border-radius: 18px;
+  margin-bottom: 2.5rem;
+  padding: 1.5rem 0 1.5rem 0;
+}
+
+
+/* =========================
+   BUTTONS
+   ========================= */
+
+
+
+.no-top-pad {
+  padding-top: 6rem; /* Extra top padding */
+}
+
+/* =========================
+   COPY FEEDBACK STYLING
+   ========================= */
+.copy-feedback {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.8rem;
+  color: #00fff7;
+  text-shadow: 0 0 8px #00fff7, 0 0 16px #00fff7;
+  margin-top: 0.5rem;
+  padding: 0.3rem 0.8rem;
+  background: rgba(0, 255, 247, 0.1);
+  border: 1px solid #00fff7;
+  border-radius: 6px;
+  animation: fadeInOut 1.2s ease-in-out;
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  20% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  80% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+/* =========================
+   FOOTER
+   ========================= */
+.footer {
+  position: relative; /* Ensure stacking context */
+  z-index: 2;         /* Above background video */
+  background: rgba(0, 0, 0, 0.6); /* Semi-transparent black background */
+  backdrop-filter: blur(6px); /* Blur the background for glassmorphism */
+  -webkit-backdrop-filter: blur(6px); /* Safari support */
+  padding: 2rem 1rem; /* Top-bottom and left-right padding */
+  text-align: center; /* Center all text inside */
+  border-top: 1px solid rgba(255, 255, 255, 0.1); /* Light top border for separation */
+  box-shadow: 0 -1px 12px #ff00cc66; /* Glowing top border */
+  margin-top: 6rem; /* Push it away from content above */
+}
+
+.footer-inner {
+  max-width: 800px; /* Keep footer content from stretching too wide */
+  margin: 0 auto; /* Center the content */
+}
+
+.footer-brand {
+  font-family: 'Press Start 2P', monospace; /* Retro pixel font */
+  font-size: 1.4rem; /* Medium-large size */
+ color: rgb(248, 201, 113);
+  letter-spacing: 0.6px;
+  text-shadow:
+  1px 1px rgb(208, 28, 154),
+    1px 2px rgb(208, 28, 154),
+      1px 3px rgb(208, 28, 154),
+        1px 4px rgb(208, 28, 154),
+          1px 5px rgb(208, 28, 154),
+            1px 6px rgb(208, 28, 154);
+  margin-bottom: 1rem; /* Space below the brand title */
+}
+
+.footer-links {
+  display: flex; /* Horizontal layout */
+  justify-content: center; /* Center horizontally */
+  gap: 2rem; /* Space between links */
+  margin-bottom: 1rem; /* Space below the links */
+  flex-wrap: wrap; /* Allow wrapping on small screens */
+}
+
+.footer-link {
+  font-family: 'Press Start 2P', monospace; /* Keep font consistent */
+  font-size: 0.65rem; /* Smaller size for legal-style links */
+  color: white; /* Default white text */
+  text-decoration: none; /* No underline */
+  text-shadow: 0 0 4px #00fff7; /* Light blue glow */
+  transition: all 0.3s ease; /* Smooth hover */
+}
+
+.footer-link:hover {
+  color: #ff00cc; /* Neon pink hover */
+  text-shadow: 0 0 10px #ff00cc; /* Stronger glow on hover */
+}
+
+.footer-copy {
+  font-size: 0.55rem; /* Very small text for copyright */
+  color: #bbb; /* Light gray */
+  text-shadow: 0 0 3px #444; /* Subtle glow to separate from bg */
+}
+
+.app-content {
+  min-height: 100vh;           /* Fill at least the viewport */
+  display: flex;               /* Use flexbox */
+  flex-direction: column;      /* Stack children vertically */
+}
+
+.app-content > *:not(.footer) {
+  flex: 1 0 auto;              /* Main content grows to fill space */
+}
+
+.footer {
+  flex-shrink: 0;              /* Footer stays at the bottom */
+}
+
+/* =========================
+   WALLPAPER GRID
+   ========================= */
+.wallpaper-grid{
+  margin-top: 40vh;
+  display: grid; /* Use CSS grid for layout */
+  grid-template-columns: repeat(4, 1fr); /* Four columns */
+  gap: 2.5rem; /* Space between grid items */
+  justify-content: center; /* Center grid horizontally */
+  align-items: start; /* Align items to the top */
+  padding: 2rem; /* Padding around grid */
+  max-width: 1800px; /* Max width for grid */
+  margin: 0 auto; /* Center grid in container */
+}
+
+
+.wallpaper-preview{
+  width: 100%; /* Full width */
+  height: auto; /* Auto height */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 0 12px rgba(255, 0, 255, 0.6); /* Neon box shadow */
+  margin-bottom: 0.75rem; /* Space below */
+}
+
+.wp-container {
+  margin-bottom: 2rem;
+}
+
+
+.wallpaper-card {
+  max-width: 400px;
+}
+
+
+
+/* =========================
+   PRICING PLAN SECTION
+   ========================= */
+/* ===================== */
+/* 🌌 PRICING CONTAINER */
+/* ===================== */
+.pricing-container {
+  position: relative;
+  padding: 6rem 2rem;
+  text-align: center;
+  background: linear-gradient(135deg, #1a002b, #2b005e);
+  color: #fff;
+  overflow-x: hidden;
+  z-index: 1;
+  margin-top: 200vh;
+}
+
+/* 🎥 BACKGROUND VIDEO */
+.bg-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: -1;
+  pointer-events: none;
+}
+
+
+.pricing-name {
+  font-weight: bold; /* Bold text */
+  background-image: linear-gradient(
+    -225deg, /* Gradient angle */
+    #17bcda 0%, /* Blue start */
+    #682da7 29%, /* Purple */
+    #eb13ff 67%, /* Pink */
+    #a600ff90 100% /* Faded purple end */
+  );
+  background-size: 200% auto; /* Animate gradient */
+  background-clip: text; /* Clip to text */
+  -webkit-background-clip: text; /* Safari clip */
+  -webkit-text-fill-color: transparent; /* Safari text fill */
+  text-decoration: none; /* No underline */
+  font-size: var(--text-4xl); /* Large text */
+  padding: 0.5rem 1rem; /* Padding */
+   animation: textclip 2s linear infinite; /* Gradient animation */
+  transition: transform 0.2s ease; /* Smooth scale */
+}
+
+@keyframes shimmer {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+/* ===================== */
+/* 🧱 PRICING GRID & CARD */
+/* ===================== */
+.pricing-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.pricing-card {
+  max-width: 420px !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+  min-height: 750px;
+  height: auto; /* allow it to grow naturally if content increases */
+  background: linear-gradient(90deg, #bc1577, #27123e);
+  border: 2px solid #ff00cc;
+  border-radius: 1.25rem;
+  box-shadow: 0 0 18px #ff00cc88, 0 0 24px #00fff7aa;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pricing-card:hover {
+  transform: scale(1.04);
+  box-shadow: 0 0 28px #ff00ccaa, 0 0 40px #00fff7cc;
+}
+
+/* 🏷️ RIBBON */
+.ribbon {
+  position: absolute;
+  top: 1.15rem;
+  left: -3.75rem;
+  background: linear-gradient(90deg, #ff00cc, #a259f7);
+  color: #fff;
+  padding: 0.6rem 2.5rem;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 1rem;
+  transform: rotate(-45deg);
+  box-shadow: 0 0 16px #ff00cc;
+  z-index: 10;
+  border-radius: 90px;
+}
+
+/* ===================== */
+/* 🔤 CARD TEXT STYLES */
+/* ===================== */
+.sub-name {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.95rem;
+  color: #ff00cc;
+  text-shadow: 0 0 6px #ff00ccaa;
+  margin-bottom: 0.75rem;
+}
+
+.pricing-img {
+  width: 150px;
+  height: 160px;;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 0 6px #ff00cc);
+}
+
+.creator-img{
+  width: 270px;
+  height: 260px;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 0 6px #ff00cc);
+}
+
+
+.price {
+  font-weight: bold; /* Bold text */
+  text-transform: uppercase; /* Uppercase */
+  background-image: linear-gradient(
+    -225deg,
+    #17bcda 0%,
+    #682da7 29%,
+    #eb13ff 67%,
+    #a600ff90 100%
+  );
+  background-size: 200% auto; /* Animate gradient */
+  background-clip: text; /* Clip to text */
+  -webkit-background-clip: text; /* Safari clip */
+  -webkit-text-fill-color: transparent; /* Safari text fill */
+  text-decoration: none; /* No underline */
+  font-size: var(--text-2xl); /* Large text */
+  padding: 0.5rem 1rem; /* Padding */
+  animation: textclip 2s linear infinite; /* Gradient animation */
+  transition: transform 0.2s ease;
+}
+
+.onetime{
+  font-family: 'Press Start 2P', monospace; /* Retro pixel font */
+  font-size: var(--text-lg); /* Medium-large size */
+  color: orange;
+  letter-spacing: 0.6px;
+  text-shadow: 4px 3px 3px rgb(191, 0, 255);
+  margin-bottom: 1rem; /* Space below the brand title */
+}
+/* 📋 BULLET LIST */
+.pricing-bullets {
+  list-style: none;
+  padding: 0;
+  margin-top: 0.85rem;
+  font-size: 0.85rem;
+  font-family: 'Press Start 2P', monospace;
+  color: #c2b5ff; /* SOFTER NEON PURPLE */
+  text-align: left;
+  line-height: 1.85; /* more breathing room */
+  text-shadow: 0 0 3px #682da7, 0 0 6px #a600ff;
+}
+
+.pricing-bullets li {
+  margin-bottom: 0.6rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.pricing-bullets li::before {
+  content: '✔';
+  color: #00fff7;
+  font-size: 0.7rem;
+  margin-top: 0.2rem;
+}
+
+.pricing-bullets li.disabled::before {
+  content: '❌';
+  color: #ff4444;
+}
+
+.pricing-bullets li.disabled {
+  opacity: 0.5;
+}
+
+/* ===================== */
+/* 💎 BUTTON STYLING */
+/* ===================== */
+.stripe-pay {
+  margin-top: 0.8rem; /* Space above */
+  display: inline-block; /* Inline block */
+  padding: var(--base-spacing); /* Padding */
+  font-size: var(--text-sm); /* Font size */
+  text-transform: uppercase; /* Uppercase */
+  font-family: 'Press Start 2P', monospace; /* Button font */
+  background: linear-gradient(120deg, #ff00cc 0%, #100215 100%); /* Button bg */
+  color: white; /* Button text */
+  border-radius: 8px; /* Rounded corners */
+  text-decoration: none; /* No underline */
+  text-shadow: 0 0 8px #00fff7; /* Button shadow */
+  box-shadow: 0 0 14px #ff00cc90; /* Button box shadow */
+  border: none; /* No border */
+  cursor: pointer; /* Pointer cursor */
+  transition: all 0.3s ease; /* Smooth transition */
+}
+
+.stripe-pay:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 32px #ff00cc, 0 0 24px #00fff7;
+}
+
+/* ===================== */
+/* Terms Section */
+/* ===================== */
+
+
+.terms-bg-wrapper {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+.terms-bg-wrapper::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/terms.jpg'); /* adjust to your desired page-specific background */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -1;
+}
+
+
+.terms-cards-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* exactly 3 columns */
+  gap: 1.5rem; /* clean spacing between cards */
+  justify-items: start; /* corrected 'left' to 'start' */
+  align-items: start;
+  padding: 2rem 1rem; /* balanced horizontal breathing room */
+  max-width: 1400px; /* controls total width of grid */
+  margin: 0 auto; /* centers grid */
+  position: relative;
+  z-index: 5;
+}
+
+.terms-card {
+  width: 100%;                         /* Takes full width of the grid column */
+  max-width: 460px;                    /* Restricts max card width */
+  min-height: auto !important;         /* Allow natural height */
+  padding: 2rem;                       /* Adds spacing inside the card */
+  background: rgba(0, 0, 0, 0.6);      /* Semi-transparent dark background */
+  border: 2px solid #ff00ff;           /* Neon pink border */
+  border-radius: 20px;                 /* Rounded corners for a smooth look */
+  box-shadow: 0 0 12px #ff00ff, 0 0 24px #ff00ff; /* Neon pink glow effect */
+  transition: transform 0.3s ease;     /* Smooth hover animation for lifting */
+  overflow: visible !important;         /* Ensure content is not cut off */
+  height: auto !important;              /* Let content determine height */
+  max-height: none !important;         /* Remove any max-height constraints */
+}
+
+.terms-card:hover {
+  transform: translateY(-10px);
+}
+
+.terms-header {
+  font-family: 'Press Start 2P', monospace;
+  font-weight: bold; /* Bold text */
+  background-image: linear-gradient(
+    -225deg,
+    #daad17 0%,
+    #a72d60 29%,
+    #eb13ff 67%,
+    #a600ff90 100%
+  );
+  background-size: 200% auto; /* Animate gradient */
+  background-clip: text; /* Clip to text */
+  -webkit-background-clip: text; /* Safari clip */
+  -webkit-text-fill-color: transparent; /* Safari text fill */
+  text-decoration: none; /* No underline */
+  font-size: 2.10rem; /* Large text */
+  padding: 0.5rem 1rem; /* Padding */
+}
+
+.terms-info {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 1.3rem;
+  line-height: 1.8;
+  padding: 1.2rem;
+  margin-top: 0.5rem;
+
+  background: rgba(0, 0, 0, 0.65);
+  border-radius: 10px;
+  border: 1.5px solid #ff00ff;
+  box-shadow: 0 0 12px rgba(255, 0, 255, 0.5);
+
+  color: #e6e6ff;
+  letter-spacing: 0.6px;
+  text-shadow: 4px 3px 3px #cc00ff;
+
+  /* 🔥 KEY FIX: no centering for multi-line content */
+  text-align: center;
+}
+
+.terms-info.list-style li {
+  margin-bottom: 1.6rem; /* Adds vertical space between list items */
+}
+/* Fix ordered list content */
+.terms-info.list-style {
+  list-style-position: inside;
+  padding-left: 0; /* Clean start */
+}
+
+
+/* ===================== */
+/* Privacy Section */
+/* ===================== */
+/* === Add this to App.css for global Retronix background === */
+.privacy-bg-wrapper {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+
+/* === Grid container for all the privacy cards === */
+.privacy-cards-container {
+  display: grid;                        /* Uses CSS Grid layout */
+  grid-template-columns: repeat(3, 1fr); /* Creates 3 equal-width columns */
+  gap: 1rem;                            /* Adds space between grid items */
+  justify-items: left;                 /* Aligns items to the left horizontally */
+  align-items: start;                  /* Aligns items to the top vertically */
+  padding: 2rem 0.060rem;          /* Adds spacing inside the container */
+  z-index: 5;                          /* Ensures it's above the background */
+  position: relative;                  /* Allows positioning with z-index */
+  max-width: 1800px;                   /* Prevents the grid from stretching too wide */
+  margin: 0 auto;                      /* Centers the container horizontally */
+}
+
+/* === Individual Privacy Card styling === */
+.privacy-card {
+  width: 100%;                         /* Takes full width of the grid column */
+  max-width: 460px;                    /* Restricts max card width */
+  min-height: auto;                    /* Allow natural height */
+  padding: 2rem;                       /* Adds spacing inside the card */
+  background: rgba(0, 0, 0, 0.6);      /* Semi-transparent dark background */
+  border: 2px solid #ff00ff;           /* Neon pink border */
+  border-radius: 20px;                 /* Rounded corners for a smooth look */
+  box-shadow: 0 0 12px #ff00ff, 0 0 24px #ff00ff; /* Neon pink glow effect */
+  transition: transform 0.3s ease;     /* Smooth hover animation for lifting */
+  overflow: visible;                    /* Ensure content is not cut off */
+  height: auto;                         /* Let content determine height */
+}
+
+/* === Hover effect for card lift === */
+.privacy-card:hover {
+  transform: translateY(-10px);        /* Moves the card upward on hover */
+}
+
+.privacy-header {
+  font-family: 'Press Start 2P', monospace;
+font-weight: bold; /* Bold text */
+  background-image: linear-gradient(
+    -225deg,
+    #daad17 0%,
+    #a72d60 29%,
+    #eb13ff 67%,
+    #a600ff90 100%
+  );
+  background-size: 200% auto; /* Animate gradient */
+  background-clip: text; /* Clip to text */
+  -webkit-background-clip: text; /* Safari clip */
+  -webkit-text-fill-color: transparent; /* Safari text fill */
+  text-decoration: none; /* No underline */
+  font-size: 1.5rem; /* Large text */
+  padding: 0.5rem 1rem; /* Padding */
+}
+
+.privacy-info {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 1.3rem;
+  line-height: 1.8;
+  padding: 1.2rem;
+  margin-top: 0.5rem;
+
+  background: rgba(0, 0, 0, 0.65);
+  border-radius: 10px;
+  border: 1.5px solid #ff00ff;
+  box-shadow: 0 0 12px rgba(255, 0, 255, 0.5);
+
+  color: rgb(248, 201, 113);
+  letter-spacing: 0.6px;
+  text-shadow:
+  1px 1px rgb(191, 0, 255),
+    1px 2px rgb(191, 0, 255),
+      1px 3px rgb(191, 0, 255),
+        1px 4px rgb(191, 0, 255),
+          1px 5px rgb(191, 0, 255),
+            1px 6px rgb(191, 0, 255);
+
+  /* 🔥 KEY FIX: no centering for multi-line content */
+  text-align: center;
+}
+
+.privacy-info.list-style li {
+  margin-bottom: 1.6rem; /* Adds vertical space between list items */
+}
+/* Fix ordered list content */
+.privacy-info.list-style {
+  list-style-position: inside;
+  padding-left: 0; /* Clean start */
+}
+
+
+
+/* ===================== */
+/* Instructions Section */
+/* ===================== */
+
+.instructions-bg-wrapper {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+.instructions-bg-wrapper::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/instructions.jpg'); /* replace with your instructions page background */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -1;
+}
+
+/* === Steps Cards Grid Container === */
+.steps-cards-container {
+  display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Creates 3 equal-width columns */
+  gap: 2.5rem;
+  justify-items: center;
+  align-items: start;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* === Steps Card === */
+.steps-card {
+  width: 100%;
+  max-width: 440px;
+  margin: 0 auto 2.2rem auto;
+  padding: 1.5rem 2rem;
+  background: rgba(0, 0, 0, 0.65);
+  border: 2px solid #ff00ff;
+  color: #ff66cc;
+  border-radius: 32px;
+  font-family: 'Press Start 2P', monospace;
+  box-shadow: 0 0 25px rgba(255, 0, 255, 0.4);
+  backdrop-filter: blur(12px);
+  transition: transform 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: auto;
+  overflow: visible;
+  height: auto;
+}
+
+.steps-card:hover {
+  transform: translateY(-10px);
+}
+
+/* === Steps Header Title === */
+.steps-header {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #ffffff;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  padding: 1rem 2rem;
+  background: transparent;
+  border: none;
+  animation: neonHeaderGlow 2.5s infinite alternate;
+}
+
+@keyframes neonHeaderGlow {
+  0% { text-shadow: 0 0 10px #ff00ff; }
+  100% { text-shadow: 0 0 16px #00fff7; }
+}
+
+/* === Main Info Text === */
+.steps-info {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 1.25rem;
+  color: #d3198cec;
+  line-height: 1.8;
+  text-shadow: 2px 2px 3px rgb(76, 0, 255);
+}
+
+.steps-info li {
+  margin-bottom: 1.5rem;
+}
+
+/* === Links inside cards === */
+.steps-info a {
+  color: #00fff7;
+  text-shadow: 1px 1px 2px #000;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.steps-info a:hover {
+  color: #ff00ff;
+}
+
+/* === Sub-Step Bubbles === */
+.sub-steps-overlay {
+  background: rgba(35, 0, 56, 0.55);
+  box-shadow: 0 0 18px #a623ff80, 0 0 42px #ff00ff33;
+  backdrop-filter: blur(4px);
+  border-radius: 18px;
+  padding: 0.7rem 1.1rem;
+  margin: 0.7rem auto;
+  max-width: 95%;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* === Sub-Step Paragraphs === */
+.sub-steps p {
+  font-family: 'Press Start 2P', monospace;
+  font-weight: bolder;
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: #7fd5e5;
+  text-shadow: 3px 3px 3px #e43697;
+  letter-spacing: 0.6px;
+  text-align: center;
+  padding: 0;
+  margin: 0 0 0.7rem 0;
+  background: none;
+  border: none;
+  box-sizing: border-box;
+  word-break: break-word;
+}
+
+/* === Steps Card Pill Row === */
+.steps-pills-row {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  flex-wrap: wrap;
+  margin: 0 auto 1rem auto;
+  box-sizing: border-box;
+}
+
+
+.wallpaper-grid--centered {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 2.5rem;
+  justify-content: center;
+  justify-items: center;
+  align-items: start;
+  padding: 2rem;
+  max-width: 1800px;
+  margin: 0 auto;
+}
+
+/* --- WALLPAPER GRID --- */
+.wallpaper-grid {
+  /* margin-top: 40vh; */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+    padding: 2rem 1rem;
+  box-sizing: border-box;
+}
+
+.wallpaper-grid-fixed {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  justify-items: center;
+  align-items: start;
+  padding: 2rem 1rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+
+
+/* --- Unified Responsive Wallpaper Grid --- */
+.wallpaper-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+  z-index: 1;
+}
+
+.wallpaper-image, .wallpaper-video {
+  width: 100%;
+  aspect-ratio: 16 / 9; /* Ensures consistent proportions */
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+  background: #181818;
+  max-height: 320px; /* optional: keeps big screens from stretching it too far */
+}
+
+/* --- Remove any margin-top: 40vh or similar from .wallpaper-grid --- */
+
+.category-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+  margin-top: 0.5rem;
+  z-index: 20;
+  position: relative;
+}
+.category-tab-btn {
+  font-family: 'Press Start 2P', monospace;
+    font-size: 1rem;
+  background: linear-gradient(90deg, #1a002b 0%, #ff00cc 100%);
+  color: #fff;
+  border: 2px solid #ff00ff;
+  border-radius: 18px;
+  padding: 0.5rem 1.2rem;
+  cursor: pointer;
+  box-shadow: 0 0 12px #ff00ff, 0 0 24px #00ffff;
+  transition: background 0.2s, color 0.2s, border 0.2s;
+  margin-bottom: 0.5rem;
+}
+.category-tab-btn.active,
+.category-tab-btn:hover {
+  background: linear-gradient(90deg, #ff00cc 0%, #00fff7 100%);
+  color: #fff;
+  border-color: #00fff7;
+}
+
+
+/* Remove category tab styles */
+.category-tabs, .category-tab-btn { display: none !important; }
+
+.container, .wallpapers-page, .pricing-container, .contact-page, .no-top-pad {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+.no-top-pad {
+  padding-top: 0 !important;
+}
+
+
+.pricing-container {
+  margin-top: 0 !important;
+}
+
+
+/* === RETRONIX HEADER FIX: Always at top under navbar, no scroll movement === */
+
+
+/* Add top padding to main content so it's not hidden under navbar+header */
+main {
+  padding-top: 7.5rem !important;   /* navbar (4.5rem) + header (5.5rem) = 10rem, adjust as needed */
+}
+
+
+
+
+
+.goo-filter-container {
+  position: absolute;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.pixel-canvas {
+  position: absolute;
+  z-index: 1;
+}
+
+/* === Add this to App.css for global Retronix background === */
+.wallpapers-page {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  background: none !important; /* Force remove any direct background */
+}
+
+.wallpapers-page::before {
+  content: "";
+  position: fixed !important; /* Force fixed positioning */
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  background-image: url('/wp-gridbg.jpg') !important;
+  background-size: contain !important; /* Use contain instead of cover to show full image */
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  z-index: -1 !important;
+}
+
+
+
+/* Ensure wallpaper cards keep their background */
+.wallpapers-page .wallpaper-card {
+  background: var(--retro-gradient) !important;
+}
+
+:root {
+  --retro-pink: #ff00ff;
+  --retro-cyan: #00ffff;
+  --retro-bg: #bc1577;
+  --retro-bg2: #27123e;
+  --retro-shadow: 0 0 12px var(--retro-pink), 0 0 24px var(--retro-cyan);
+  --retro-card-shadow: 0 0 12px var(--retro-pink), 0 0 24px var(--retro-cyan);
+  --retro-hover-shadow: 0 0 18px var(--retro-pink), 0 0 36px var(--retro-cyan);
+  --retro-gradient: linear-gradient(90deg, var(--retro-bg), var(--retro-bg2));
+  --retro-border: 2px solid var(--retro-pink);
+  --retro-radius: 16px;
+  --retro-img-bg: #181818;
+}
+
+/* --- UNIFIED WALLPAPER GRID & CARD STYLES --- */
+.wallpaper-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  max-width: 1800px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+  z-index: 10;
+  position: relative;
+}
+
+.wallpaper-card {
+  width: 100%;
+  max-width: 500px;
+  aspect-ratio: 16/10;
+  background: var(--retro-gradient);
+  border: var(--retro-border);
+  border-radius: var(--retro-radius);
+  padding: 1.2rem 0.8rem 1.5rem 0.8rem;
+  text-align: center;
+  box-shadow: var(--retro-card-shadow);
+  margin: 0 auto;
+  display: flex;
+    flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 15;
+  transition: transform 0.18s cubic-bezier(.4,2,.6,1), box-shadow 0.18s cubic-bezier(.4,2,.6,1);
+  will-change: transform, box-shadow;
+}
+.wallpaper-card::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  z-index: 0;
+  opacity: 0.15;
+  pointer-events: none;
+}
+.wallpaper-card > * {
+  position: relative;
+  z-index: 2;
+}
+.wallpaper-card:hover {
+  transform: scale(1.04);
+  box-shadow: var(--retro-hover-shadow);
+}
+
+
+/* --- ANIMATIONS (deduped) --- */
+@keyframes shimmerPink {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+@keyframes rotateBG {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* === FORCE WALLPAPER GRID: 4 BIG CARDS PER ROW ON /wallpapers PAGE === */
+.wallpaper-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 2.2rem !important;
+  max-width: 1800px !important;
+  margin: 0 auto !important;
+  padding: 2.5rem 1.5rem 3.5rem 1.5rem !important;
+  justify-items: center !important;
+  align-items: stretch !important;
+}
+
+/* === AGGRESSIVE MOBILE OVERRIDE FOR WALLPAPER GRID === */
+@media (max-width: 500px) {
+  .wallpaper-grid,
+  .wallpaper-grid-custom,
+  .wallpaper-grid--centered {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto !important;
+    gap: 1rem !important;
+    padding: 1rem 0.5rem !important;
+    max-width: 100vw !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    justify-items: center !important;
+    align-items: stretch !important;
+  }
+  
+  .wallpaper-card {
+    width: 100% !important;
+    max-width: 95vw !important;
+    min-width: 0 !important;
+    aspect-ratio: auto !important;
+    height: auto !important;
+    padding: 1rem 0.5rem !important;
+    margin: 0.5rem auto !important;
+  }
+  
+  /* Mobile background fixes - removed since using ::before approach */
+  
+  .wallpapers-page .wallpaper-grid {
+    background: transparent !important;
+  }
+}
+
+/* === EVEN MORE AGGRESSIVE FOR SMALLER SCREENS === */
+@media (max-width: 390px) {
+  .wallpaper-grid,
+  .wallpaper-grid-custom,
+  .wallpaper-grid--centered {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto !important;
+    gap: 0.8rem !important;
+    padding: 0.8rem 0.3rem !important;
+    max-width: 100vw !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    justify-items: center !important;
+    align-items: stretch !important;
+  }
+  
+  .wallpaper-card {
+    width: 100% !important;
+    max-width: 95vw !important;
+    min-width: 0 !important;
+    aspect-ratio: auto !important;
+    height: auto !important;
+    padding: 0.8rem 0.4rem !important;
+    margin: 0.3rem auto !important;
+  }
+}
+
+.wallpaper-card {
+  width: 100% !important;
+  max-width: 420px !important;
+  aspect-ratio: 16/9 !important;
+  min-height: 0 !important;
+  background: linear-gradient(90deg, #bc1577, #27123e) !important;
+  border: 2px solid #ff00ff !important;
+  border-radius: 16px !important;
+  box-shadow: 0 0 12px #ff00ff, 0 0 24px #00ffff !important;
+  margin: 0 auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  position: relative !important;
+  z-index: 2 !important;
+  padding: 1.2rem 0.8rem 1.5rem 0.8rem !important;
+  transition: box-shadow 0.25s, transform 0.18s !important;
+}
+
+.wallpaper-image, .wallpaper-video {
+  width: 100% !important;
+  height: 100% !important;
+  max-height: 180px!important;
+  object-fit: cover !important;
+  border-radius: 12px !important;
+  margin-bottom: 0.7rem !important;
+  background: #181818 !important;
+}
+
+/* Auth Action Page */
+auth-action-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: url('/Auth.jpg') center/cover no-repeat fixed;
+  backdrop-filter: brightness(0.5);
+  font-family: 'Orbitron', sans-serif; /* or your chosen retro font */
+  color: #fff;
+}
+
+.auth-action-content {
+  background: rgba(0, 0, 0, 0.6);
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+}
+
+.auth-action-content input {
+  display: block;
+  width: 100%;
+  padding: 0.75rem;
+  margin: 0.5rem 0;
+  border-radius: 6px;
+  border: none;
+}
+
+.auth-action-content button {
+  background: #e91e63;
+  color: #fff;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.auth-action-content button:hover {
+  background: #ad1457;
+}
+
+.error-text {
+  color: #ff5252;
+  margin-bottom: 1rem;
+}
+
+.success-text {
+  color: #69f0ae;
+  margin-bottom: 1rem;
+}
+
+/* === FIX: NEVER MORE THAN 4 WALLPAPER CARDS PER ROW, EVEN ON ULTRA-WIDE === */
+.wallpaper-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)) !important;
+  max-width: 1720px !important;
+  margin: 0 auto !important;
+  gap: 2.2rem !important;
+  padding: 2.5rem 1.5rem 3.5rem 1.5rem !important;
+  justify-items: center !important;
+  align-items: stretch !important;
+}
+
+.wallpaper-card {
+  width: 100% !important;
+  max-width: 420px !important;
+  aspect-ratio: 16/9 !important;
+  min-height: 0 !important;
+}
+
+/* ==============================
+   📱 RETRONIX CLEAN MEDIA QUERIES
+   ============================== */
+
+/* === MOBILE PHONES (<480px) === */
+@media (max-width: 480px) {
+  .navbar-inner {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .nav-link {
+    font-size: 2rem;
+    padding: 0.3rem 0.5rem;
+  }
+
+  .brand-logo {
+    width: 50px;
+    margin-bottom: 0.5rem;
+  }
+
+  
+  .about-name,
+  .contact-name,
+  .faqs-name,
+  .pricing-name,
+  .account-name,
+  .wallpapers-name {
+    font-size: clamp(1.2rem, 6vw, 1.6rem);
+    margin-top: 10vh !important;
+    text-align: center;
+  }
+
+
+  .wallpaper-card,
+  .pricing-card,
+  .about-card {
+    max-width: 100%;
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  .account-card {
+    max-width: 90%;
+    padding: 1rem;
+    margin: 2rem auto 2rem auto;
+  }
+
+  .stripe-pay,
+  .view-more-button,
+  .logout-btn,
+  .email-login,
+  .google-login {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.6rem;
+    margin-top: 0.5rem;
+  }
+
+  .footer {
+    font-size: 0.7rem;
+    padding: 0.5rem;
+  }
+}
+
+/* === SMALL TABLETS (<700px) === */
+@media (max-width: 700px) {
+  .navbar-inner {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .nav-link {
+    font-size: clamp(0.9rem, 4vw, 1rem);
+    padding: 0.3rem 0.6rem;
+  }
+
+ 
+  .about-name,
+  .contact-name,
+  .faqs-name,
+  .pricing-name,
+  .account-name,
+  .wallpapers-name {
+    font-size: clamp(1.4rem, 7vw, 2rem);
+    margin-top: 1.5rem !important;
+    text-align: center;
+  }
+
+
+
+  .wallpaper-card,
+  .pricing-card,
+  .about-card {
+    max-width: 95%;
+    padding: 0.6rem;
+    font-size: 0.95rem;
+  }
+
+  .account-card {
+    max-width: 90%;
+    padding: 1.2rem;
+    margin: 2rem auto 2rem auto;
+  }
+}
+
+/* === TABLETS & SMALL LAPTOPS (<900px) === */
+@media (max-width: 900px) {
+  .wallpaper-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .about-cards-container,
+  .pricing-wrapper {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .wallpaper-card,
+  .pricing-card,
+  .about-card {
+    max-width: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+  }
+
+  .navbar-inner {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .nav-link {
+    font-size: clamp(1rem, 3vw, 1.2rem);
+    padding: 0.4rem 0.7rem;
+  }
+}
+
+/* === DESKTOPS (<1200px) === */
+@media (max-width: 1200px) {
+  .wallpaper-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .container {
+    padding: 1.2rem;
+  }
+}
+
+/* === ULTRA-WIDE SCREENS (>1600px) === */
+@media (min-width: 1600px) {
+  .container {
+    max-width: 1500px;
+    margin: 0 auto;
+  }
+}
+
+/* ==============================
+   📱 RETRONIX RESPONSIVE MEDIA QUERIES
+   ============================== */
+
+/* === MOBILE PHONES (<480px) === */
+@media (max-width: 480px) {
+  .navbar-inner {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .nav-link {
+    font-size: clamp(0.8rem, 4vw, 1rem);
+    padding: 0.3rem 0.5rem;
+  }
+  .brand-logo {
+    width: 50px;
+    margin-bottom: 0.5rem;
+  }
+
+
+  .wallpaper-card {
+    max-width: 200vw;
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+  .account-card {
+    max-width: 95vw;
+    padding: 1.5rem;
+    margin: 1rem auto 2rem auto;
+    min-height: auto;
+    overflow: visible;
+    height: auto;
+  }
+  .logout-btn {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.6rem;
+    margin-top: 0.5rem;
+  }
+  
+  /* iPhone 11/12 specific fixes */
+  .terms-card, .privacy-card {
+    max-width: 95vw;
+    padding: 1.5rem;
+    margin: 1rem auto 2rem auto;
+    min-height: auto !important;
+    overflow: visible !important;
+    height: auto !important;
+    max-height: none !important;
+  }
+  
+  .terms-info, .privacy-info {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    padding: 1rem;
+    margin-top: 0.5rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+}
+
+/* === SMALL TABLETS (<700px) === */
+@media (max-width: 700px) {
+  .navbar-inner {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  .nav-link {
+    font-size: clamp(0.9rem, 4vw, 1.1rem);
+    padding: 0.3rem 0.6rem;
+  }
+ 
+ 
+  .wallpaper-card {
+    max-width: 150vw;
+    padding: 0.6rem;
+    font-size: 0.95rem;
+  }
+  .account-card {
+    max-width: 92vw;
+    padding: 1.8rem;
+    margin: 2rem auto 2rem auto;
+    min-height: auto;
+    overflow: visible;
+    height: auto;
+  }
+  .logout-btn {
+    font-size: 0.9rem;
+    padding: 0.5rem 0.8rem;
+    margin-top: 0.5rem;
+  }
+}
+
+/* === TABLETS & SMALL LAPTOPS (<900px) === */
+@media (max-width: 900px) {
+  .wallpaper-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    padding: 1rem;
+    max-width: 100vw;
+  }
+  .wallpaper-card {
+    max-width: 98vw;
+    padding: 1rem;
+    font-size: 1rem;
+  }
+  .account-card {
+    max-width: 88vw;
+    padding: 2rem;
+    margin: 2rem auto 2rem auto;
+    min-height: auto;
+    overflow: visible;
+    height: auto;
+  }
+ 
+  .nav-link {
+    font-size: clamp(1rem, 3vw, 1.2rem);
+    padding: 0.4rem 0.7rem;
+  }
+  .logout-btn {
+    font-size: 1rem;
+    padding: 0.6rem 1rem;
+  }
+}
+
+/* === DESKTOPS (<1200px) === */
+@media (max-width: 1200px) {
+  .wallpaper-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.2rem;
+    padding: 1.2rem;
+    max-width: 100vw;
+  }
+  .wallpaper-card {
+    max-width: 32vw;
+    padding: 1rem;
+    font-size: 1.05rem;
+  }
+  .account-card {
+    max-width: 60vw;
+    padding: 2.5rem;
+    margin: 2rem auto 2rem auto;
+    min-height: auto;
+    overflow: visible;
+    height: auto;
+  }
+
+  .nav-link {
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    padding: 0.5rem 1rem;
+  }
+  .logout-btn {
+    font-size: 1.1rem;
+    padding: 0.7rem 1.2rem;
+  }
+}
+
+/* === ULTRA-WIDE SCREENS (>1600px) === */
+@media (min-width: 1600px) {
+  .wallpaper-grid {
+    max-width: 1720px;
+  }
+  .account-card {
+    max-width: 600px;
+  }
+  
+  /* Scale down elements on very large screens to match localhost appearance */
+  :root {
+    font-size: clamp(14px, 0.8vw, 16px);
+  }
+  
+
+  
+  .nav-link {
+    font-size: var(--text-base);
+  }
+  
+  .slogan {
+    font-size: var(--text-sm);
+  }
+  
+  .preview-title,
+  .countdown-timer {
+    font-size: var(--text-xl);
+  }
+  
+  .pricing-name {
+    font-size: var(--text-3xl);
+  }
+  
+  .price {
+    font-size: var(--text-xl);
+  }
+  
+  .onetime {
+    font-size: var(--text-base);
+  }
+  
+  .contact-name {
+    font-size: var(--text-3xl);
+  }
+  
+  .ac-info {
+    font-size: var(--text-xl);
+  }
+}
+
+/* Additional scaling for ultra-wide screens */
+@media (min-width: 1920px) {
+  :root {
+    font-size: clamp(12px, 0.7vw, 14px);
+  }
+  
+  
+  .nav-link {
+    font-size: var(--text-sm);
+  }
+  
+  .pricing-name {
+    font-size: var(--text-2xl);
+  }
+  
+  .price {
+    font-size: var(--text-lg);
+  }
+  
+  .onetime {
+    font-size: var(--text-sm);
+  }
+  
+  .contact-name {
+    font-size: var(--text-2xl);
+  }
+  
+  .ac-info {
+    font-size: var(--text-lg);
+  }
+}
+
+@media (min-width: 2560px) {
+  :root {
+    font-size: clamp(10px, 0.6vw, 12px);
+  }
+  
+  
+  .nav-link {
+    font-size: var(--text-xs);
+  }
+  
+  .pricing-name {
+    font-size: var(--text-xl);
+  }
+  
+  .price {
+    font-size: var(--text-base);
+  }
+  
+  .onetime {
+    font-size: var(--text-xs);
+  }
+  
+  .contact-name {
+    font-size: var(--text-xl);
+  }
+  
+  .ac-info {
+    font-size: var(--text-base);
+  }
+}
+
+/* === NAVBAR WIDTH & NO HORIZONTAL SCROLL FIX === */
+html, body {
+  overflow-x: hidden !important;
+}
+.navbar, .navbar-inner {
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* === NAVBAR MOBILE FIX: PREVENT CUT-OFF === */
+@media (max-width: 700px) {
+  .navbar {
+    white-space: nowrap !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+  }
+  .navbar-inner {
+    flex-wrap: nowrap !important;
+    justify-content: flex-start !important;
+    gap: 0.5rem !important;
+  }
+}
+
+/* === WALLPAPER GRID/CARD RESPONSIVE FIX === */
+.wallpaper-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  max-width: 1720px !important;
+  margin: 0 auto !important;
+  gap: 2.2rem !important;
+  padding: 2.5rem 1.5rem 3.5rem 1.5rem !important;
+  justify-items: center !important;
+  align-items: stretch !important;
+}
+@media (max-width: 900px) {
+  .wallpaper-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+@media (max-width: 700px) {
+  .wallpaper-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1.2rem !important;
+    padding: 1.2rem 0.5rem !important;
+  }
+}
+.wallpaper-card {
+  width: 100% !important;
+  max-width: 890px !important;
+  aspect-ratio: 16/9 !important;
+  min-height: 0 !important;
+}
+
+/* === MOBILE MENU === */
+@media (max-width: 768px) {
+  .hamburger-btn {
+    display: block;
+  }
+  .navbar-right {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    flex-direction: column;
+    align-items: center;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+  .navbar-right.open {
+    max-height: 400px;
+    padding: 1rem 0;
+  }
+  .nav-link {
+    padding: 0.75rem 0;
+    width: 100%;
+    text-align: center;
+    font-size: 1rem;
+    border-bottom: 1px solid rgba(255, 0, 255, 0.1);
+  }
+  .nav-link:last-child {
+    border-bottom: none;
+  }
+}
+
+
+.retronix-hamburger.open span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+.retronix-hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+.retronix-hamburger.open span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* === MOBILE NAVBAR === */
+@media (max-width: 900px) {
+  .retronix-navbar-inner {
+    padding: 0.7rem 1rem 0.7rem 1rem;
+  }
+  .retronix-navbar-links {
+    gap: 1.1rem;
+  }
+  .retronix-nav-link {
+    font-size: 0.95rem;
+    padding: 0.5rem 0.5rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .retronix-navbar-inner {
+    justify-content: flex-end;
+    padding: 0.7rem 0.7rem 0.7rem 0.7rem;
+  }
+  .retronix-hamburger {
+    display: flex;
+  }
+  .retronix-navbar-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100vw;
+    background: linear-gradient(90deg, #1a002b 0%, #ff00cc 100%);
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.2rem;
+    padding: 0.7rem 0 1.1rem 0;
+    box-shadow: 0 8px 32px #ff00ff44;
+    border-bottom-left-radius: 18px;
+    border-bottom-right-radius: 18px;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-16px);
+    transition: opacity 0.28s cubic-bezier(.4,2,.6,1), transform 0.28s cubic-bezier(.4,2,.6,1);
+    z-index: 1201;
+  }
+  .retronix-navbar-links.open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+  .retronix-nav-link {
+    font-size: 1rem;
+    padding: 1.1rem 0;
+    margin: 0 1.2rem;
+    border-radius: 8px;
+    text-align: center;
+    background: none;
+    box-shadow: none;
+    border-bottom: 1px solid rgba(255,0,255,0.08);
+    transition: background 0.18s, color 0.18s;
+  }
+  .retronix-nav-link:last-child {
+    border-bottom: none;
+  }
+}
+
+/* Prevent body scroll when menu is open (optional, add/remove as needed) */
+body.menu-open {
+  overflow: hidden;
+}
+
+/* === FIX: WALLPAPER GRID - NO INTERNAL SCROLL, NO CUT-OFF === */
+.wp-container {
+  overflow: visible !important;
+  height: auto !important;
+  max-height: none !important;
+}
+
+.wallpaper-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)) !important;
+  gap: 2rem !important;
+  max-width: 1800px !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+  padding: 2rem 1rem !important;
+  box-sizing: border-box !important;
+  overflow: visible !important;
+}
+
+
+.wallpaper-image, .wallpaper-video {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  max-height: 1000px !important;
+  aspect-ratio: 16/9 !important;
+  object-fit: cover !important;
+  border-radius: 10px !important;
+  margin-bottom: 0.7rem !important;
+  background: #181818 !important;
+  transition: box-shadow 0.18s cubic-bezier(.4,2,.6,1);
+  box-shadow: 0 0 8px #ff00ff;
+}
+
+@media (min-width: 701px) {
+  .retronix-navbar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem;
+    width: 100%;
+    padding: 0.7rem 2.2rem 0.7rem 1.2rem;
+  }
+  .retronix-navbar-links {
+    display: flex;
+    gap: 2.5rem;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+  .retronix-navbar .nav-link, .retronix-navbar-links .nav-link {
+    font-size: 1.1rem;
+    letter-spacing: 0.04em;
+    padding: 0.5rem 1.2rem;
+    text-align: center;
+    display: inline-block;
+  }
+}
+
+@media (min-width: 701px) {
+  .retronix-navbar .nav-link, .retronix-navbar-links .nav-link {
+    font-size: 2.3rem;
+  }
+}
+
+/* === RETRONIX NAVBAR & WALLPAPER GRID FINAL OVERRIDES === */
+@media (min-width: 701px) {
+  .retronix-navbar .nav-link,
+  .retronix-navbar-links .nav-link {
+    font-size: 10rem !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .wallpaper-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+@media (min-width: 1100px) {
+  .pricing-wrapper {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 2rem !important;
+    max-width: 1600px !important;
+    margin: 0 auto !important;
+    padding: 2rem 1rem !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .pricing-wrapper,
+  .terms-cards-container {
+   grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 700px) {
+  .privacy-cards-container,
+  .terms-cards-container {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+    padding: 1rem 0.5rem !important;
+  }
+}
+
+/* === Retronix: Ensure spacing between navbar and .header-bg on all pages === */
+.header-bg {
+  margin-top: 6.5rem !important; /* Adjust as needed for your navbar height */
+}
+
+/* === Retronix: Make wallpaper grid header fixed below navbar === */
+
+
+
+
+
+@media (max-width: 700px) {
+  .header-bg {
+    margin-top: 4rem !important;
+  }
+}
+
+
+/* === RETRONIX WALLPAPER GRID & HEADER RESPONSIVE REFACTOR === */
+
+ 
+
+  /* Remove any horizontal scroll from containers */
+  .container, .wp-container, .wallpapers-page {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+
+/* --- End of Retronix responsive grid & header refactor --- */
+
+@media (max-width: 768px) {
+  /* --- Wallpaper Card Height Fix --- */
+  .wallpaper-card {
+    max-width: 90vw !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    padding: 0.7rem 0.3rem 1rem 0.3rem !important;
+    font-size: 0.95rem !important;
+    box-shadow: 0 0 8px #ff00ff, 0 0 16px #00ffff !important;
+   max-height: 1000px !important; height: auto !important;           /* Let card height be auto */
+    aspect-ratio: unset !important;    /* Remove forced aspect ratio */
+  }
+  .wallpaper-image, .wallpaper-video {
+    height: auto !important;           /* Let image/video height be auto */
+    max-height: 1000px !important;      /* Limit max height for mobile */
+    border-radius: 8px !important;
+    margin-bottom: 0.4rem !important;
+    object-fit: cover !important;
+  }
+
+/* --- Dropdown/Select Fix --- */
+/* --- Dropdown/Select Fix --- */
+select,
+.wallpapers-controls-bar select,
+.wallpapers-controls-bar label {
+  flex-direction: column;
+  font-size: 1.1rem !important; /* Dropdown/label text size */
+  padding: 0.4rem 0.7rem !important; /* Internal spacing for tap targets */
+  min-width: 0 !important; /* Flexibility */
+  max-width: 90vw !important; /* Prevent overflow */
+  border-radius: 8px !important; /* Rounded edges */
+}
+
+.wallpapers-controls-bar label {
+  font-size: 1.1rem !important; /* Consistency */
+  padding: 0.4rem 0.7rem !important; /* Spacing */
+}
+
+@media (max-width: 768px) {
+  /* --- Buttons/Dropdowns inside Controls Bar --- */
+  .wallpapers-controls-bar select,
+  .wallpapers-controls-bar button,
+  .wallpapers-controls-bar .view-more-button {
+    background: #1a0025 !important; /* Dark retro button bg */
+    border: 2px solid #ff00cc !important; /* Neon pink border */
+    box-shadow: 0 0 8px #ff00cc, 0 0 16px #00fff7 !important; /* Glow */
+    color: #fff !important; /* Text color */
+    border-radius: 10px !important; /* Rounded corners */
+    font-size: 0.9rem !important; /* Even smaller text size */
+    padding: 0.15rem 0.4rem !important; /* Much tighter internal spacing */
+    margin: 0.1rem 0 !important; /* Minimal vertical spacing */
+    min-width: 80px !important; /* Minimum width for readability */
+    max-width: 200px !important; /* Much smaller max width */
+    height: auto !important; /* Auto height */
+    min-height: 28px !important; /* Minimum height */
+    text-align: center !important; /* Center text */
+    line-height: 1.1 !important; /* Very tight line height */
+  }
+
+  .wallpapers-controls-bar label {
+    color: #ff99cc !important; /* Neon pink text */
+    text-shadow: 0 0 6px #ff00cc !important; /* Glow */
+    font-size: 1.1rem !important; /* Readable */
+    padding: 0.4rem 0.7rem !important; /* Spacing */
+  }
+
+}
+
+/* --- CONTROLS BAR TWEAKS FOR ALL SCREENS (DESKTOP + MOBILE) --- */
+.wallpapers-controls-bar {
+  position: relative !important; /* Keeps it in document flow */
+  z-index: 5 !important; /* Below header layering but above grid */
+  width: auto !important; /* Allow natural sizing instead of forcing fit-content */
+  max-width: 90vw !important; /* Prevents overflow but allows wider on desktop */
+  margin-left: auto !important; /* Center horizontally */
+  margin-right: auto !important; /* Center horizontally */
+  margin-top: 2rem !important; /* ✅ Reduced spacing below header */
+  margin-bottom: 2rem !important; /* Reduced space below bar before grid */
+  display: flex !important; /* Enable horizontal layout on desktop */
+  flex-direction: column !important; /* Align controls in a row on desktop */
+  justify-content: center !important; /* Center children in the bar */
+  align-items: center !important; /* Vertically center items */
+  gap: 0.2rem !important; /* Minimal spacing between controls */
+  background: rgba(20, 0, 30, 0.92) !important; /* Retro dark translucent bg for visibility */
+  border-radius: 12px !important; /* Rounded edges */
+  box-shadow: 0 0 8px #ff00ff, 0 0 16px #00ffff !important; /* Neon glow */
+  padding: 0.5rem 0.8rem !important; /* Reduced internal padding */
+}
+
+@media (min-width: 769px) {
+  .wallpapers-controls-bar {
+    margin-top: 5rem !important; /* or adjust to 6rem, 7rem if needed */
+  }
+}
+@media (min-width: 769px) {
+  /* --- Desktop dropdowns/buttons styling --- */
+  select,
+  .wallpapers-controls-bar select {
+    font-size: 1rem !important; /* Smaller text size */
+    padding: 0.4rem 0.8rem !important; /* Tighter desktop padding */
+    border-radius: 8px !important; /* Rounded corners */
+    min-width: 120px !important; /* Consistent desktop width */
+    max-width: 320px !important; /* Prevent excessive width */
+    background: #1a0025 !important; /* Dark retro bg */
+    color: #fff !important; /* Text color */
+    border: 2px solid #ff00cc !important; /* Neon pink border */
+    box-shadow: 0 0 8px #ff00cc, 0 0 16px #00fff7 !important; /* Glow */
+    line-height: 1.2 !important; /* Tighter line height */
+  }
+}
+
+@media (max-width: 700px) {
+  .contact-content a[href^='mailto'] {
+    font-size: 0.95rem !important;
+    word-break: break-all !important;
+    display: inline-block;
+  }
+}
+
+.contact-content {
+  max-width: 540px;
+  margin: 2rem auto;
+  padding: 2rem 2rem;
+  border-radius: 16px;
+  background: rgba(30,0,40,0.92);
+  box-shadow: 0 0 16px #ff00cc;
+  word-break: break-word;
+}
+
+.contact-content a[href^='mailto'] {
+  font-size: 1.05rem;
+  word-break: break-all;
+  display: inline-block;
+}
+
+@media (max-width: 700px) {
+  /* ... */
+  .contact-content a[href^='mailto'] {
+    font-size: 0.95rem !important;
+    word-break: break-all !important;
+    display: inline-block;
+  }
+} /* <-- This closes the @media block! */
+
+.contact-content {
+  max-width: 540px;
+  margin: 2rem auto;
+  padding: 2rem 2rem;
+  border-radius: 16px;
+  background: rgba(84, 52, 94, 0.92);
+  box-shadow: 0 0 16px #ff00cc;
+  word-break: break-word;
+}
+
+.contact-content a[href^='mailto'] {
+  font-size: 1.05rem;
+  word-break: break-all;
+  display: inline-block;
+}
+
+@media (max-width: 700px) {
+  .question {
+    font-size: 1.4rem !important;
+    padding: 0.4rem 0.5rem !important;
+    word-break: break-word !important;
+  }
+  .faqs-card .answer, .answer {
+    font-size: 1.15rem !important;
+    line-height: 1.7 !important;
+    word-break: break-word !important;
+    padding: 0.3rem 0.5rem !important;
+  }
+}
+
+/* --- Neon gradient and shadow for AuthAction header --- */
+.auth-action-content h1 {
+  font-family: 'Press Start 2P', monospace;
+  font-weight: bolder;
+  font-size: 1.5rem;
+  line-height: 2.6;
+  text-align: center;
+  color: #ff99cc;
+  text-shadow:
+  1px 1px rgb(191, 0, 255),
+    1px 2px rgb(191, 0, 255),
+      1px 3px rgb(191, 0, 255),
+        1px 4px rgb(191, 0, 255),
+          1px 5px rgb(191, 0, 255),
+            1px 6px rgb(191, 0, 255);
+ 
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* --- Remove all top margin/padding from the contact header (stronger selector) --- */
+.contact-name {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+
+/* --- PRICING CARDS RESPONSIVE GRID --- */
+.pricing-wrapper {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 2rem !important;
+  max-width: 1600px !important;
+  margin: 0 auto !important;
+  padding: 2rem 1rem !important;
+}
+@media (max-width: 1100px) {
+  .pricing-wrapper {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+@media (max-width: 700px) {
+  .pricing-wrapper {
+    grid-template-columns: 1fr !important;
+  }
+  .pricing-card {
+    max-width: 98vw !important;
+    padding: 0.7rem 0.3rem 1rem 0.3rem !important;
+    font-size: 0.95rem !important;
+    min-width: 0 !important;
+    margin: 0 auto 1.5rem auto !important;
+  }
+}
+/* --- ENLARGE PRICING CARDS ON DESKTOP --- */
+@media (min-width: 1100px) {
+  .pricing-card {
+    max-width: 480px !important;
+    min-height: 820px !important;
+    padding: 2.5rem 2rem 2.5rem 2rem !important;
+    font-size: 1.15rem !important;
+  }
+}
+
+/* === RETRONIX: FINAL OVERRIDES FOR WALLPAPER & PRICING CARDS === */
+
+
+
+
+/* PRICING GRID: 4/2/1 per row, bigger cards on desktop */
+.pricing-wrapper {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 2.5rem !important;
+  max-width: 1800px !important;
+  margin: 0 auto !important;
+  padding: 2.5rem 2rem !important;
+}
+@media (max-width: 1100px) {
+  .pricing-wrapper {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+@media (max-width: 700px) {
+  .pricing-wrapper {
+    grid-template-columns: 1fr !important;
+  }
+  .pricing-card {
+    max-width: 200vw !important;
+    padding: 0.7rem 0.3rem 1rem 0.3rem !important;
+    font-size: 0.95rem !important;
+    min-width: 0 !important;
+    margin: 0 auto 1.5rem auto !important;
+  }
+}
+@media (min-width: 1200px) {
+  .pricing-card {
+    max-width: 100px !important;
+    min-height: 900px !important;
+    padding: 3rem 2.2rem 3rem 2.2rem !important;
+    font-size: 1.18rem !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .wallpaper-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 3rem !important;
+    max-width: 2000px !important;
+    padding: 3rem 2rem 4rem 2rem !important;
+  }
+  .wallpaper-card {
+    max-width: 650px !important;
+    min-width: 420px !important;
+    aspect-ratio: 16/7 !important;
+    padding: 2rem 1.5rem 2.5rem 1.5rem !important;
+    font-size: 1.18rem !important;
+  }
+} /* <-- Properly close the previous media query */
+
+
+}
+
+/* --- FAQS Responsive Font Sizes --- */
+@media (max-width: 900px) {
+  .question {
+    font-size: 1.45rem !important;
+    padding: 0.5rem 0.7rem !important;
+  }
+  .faqs-card .answer, .answer {
+    font-size: 1.22rem !important;
+    line-height: 1.7 !important;
+    padding: 0.4rem 0.7rem !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .question {
+    font-size: 1.18rem !important;
+    padding: 0.4rem 0.6rem !important;
+  }
+  .faqs-card .answer, .answer {
+    font-size: 1.05rem !important;
+    line-height: 1.6 !important;
+    padding: 0.3rem 0.6rem !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .wallpaper-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1.2rem !important;
+    padding: 1.2rem 0.5rem !important;
+  }
+}
+@media (max-width: 480px) {
+  .wallpaper-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+/* Responsive wallpaper grid for LiveGrid and StaticGrid */
+.wallpaper-grid-custom {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+  justify-items: center;
+  align-items: stretch;
+  /* Remove any overflow or scroll styles */
+  
+  max-height: none !important;
+  height: auto !important;
+}
+@media (max-width: 700px) {
+  .wallpaper-grid-custom {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* --- CSS FIX: Make wallpaper grid and cards fully responsive, prevent zoom/overflow --- */
+.wallpaper-card {
+  max-width: 100% !important;
+  width: 100% !important;
+  min-width: 0 !important;
+}
+
+.wallpaper-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)) !important;
+  gap: 2rem !important;
+  max-width: 1800px !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+  padding: 2rem 1rem !important;
+  box-sizing: border-box !important;
+  overflow: visible !important;
+}
+
+.wallpapers-page, .container {
+  max-width: 100vw !important;
+  overflow-x: hidden !important;
+}
+
+@media (max-width: 900px) {
+  .wallpaper-card {
+    max-width: 100% !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+}
+@media (max-width: 700px) {
+  .wallpaper-card {
+    max-width: 100% !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+}
+@media (max-width: 480px) {
+  .wallpaper-card {
+    max-width: 100% !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+}
+/* --- END CSS FIX --- */
+
+/* --- Responsive wallpaper card buttons --- */
+.wallpaper-card a,
+.wallpaper-card button {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  font-size: 1rem !important;
+  padding: 0.75rem 0.5rem !important;
+  margin: 0.5rem 0 !important;
+}
+
+@media (max-width: 700px) {
+  .wallpaper-card a,
+  .wallpaper-card button {
+    font-size: 0.95rem !important;
+    padding: 0.6rem 0.3rem !important;
+  }
+  .brand-name {
+    font-size: 2.2rem !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .steps-cards-container {
+    grid-template-columns: 1fr !important;
+    gap: 1.2rem !important;
+    padding: 1.2rem 0.5rem !important;
+  }
+}
+
+/* === Comprehensive Mobile Fixes for All iPhone Sizes === */
+
+/* iPhone SE, iPhone 6/7/8, iPhone X/XS, iPhone 11 Pro, iPhone 12 mini */
+@media (max-width: 375px) {
+  .privacy-cards-container,
+  .terms-cards-container {
+    grid-template-columns: 1fr !important;
+    gap: 0.8rem !important;
+    padding: 0.8rem 0.3rem !important;
+  }
+  
+  .terms-card, .privacy-card {
+    max-width: 95vw !important;
+    padding: 0.8rem !important;
+    margin: 0.3rem auto 1.5rem auto !important;
+    min-height: auto !important;
+    overflow: visible !important;
+    height: auto !important;
+    max-height: none !important;
+  }
+  
+  .terms-info, .privacy-info {
+    font-size: 0.9rem !important;
+    line-height: 1.4 !important;
+    padding: 0.6rem !important;
+    margin-top: 0.2rem !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+  }
+  
+  .account-card {
+    max-width: 95vw !important;
+    padding: 0.8rem !important;
+    margin: 0.3rem auto 1.5rem auto !important;
+    min-height: auto !important;
+    overflow: visible !important;
+    height: auto !important;
+    max-height: none !important;
+  }
+  
+  /* Wallpaper grid fixes for small screens */
+  .wallpaper-grid {
+    grid-template-columns: 1fr !important;
+    gap: 0.8rem !important;
+    padding: 0.8rem 0.3rem !important;
+  }
+  
+  .wallpaper-card {
+    max-width: 95vw !important;
+    padding: 0.6rem !important;
+  }
+}
+
+/* iPhone 12/13/14, iPhone 12/13/14 Pro */
+@media (max-width: 390px) {
+  .privacy-cards-container,
+  .terms-cards-container {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+    padding: 1rem 0.5rem !important;
+  }
+  
+  .terms-card, .privacy-card {
+    max-width: 98vw;
+    padding: 1rem;
+    margin: 0.5rem auto 2rem auto;
+    min-height: auto !important;
+    overflow: visible !important;
+    height: auto !important;
+    max-height: none !important;
+  }
+  
+  .terms-info, .privacy-info {
+    font-size: 1rem;
+    line-height: 1.5;
+    padding: 0.8rem;
+    margin-top: 0.3rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+  
+  .account-card {
+    max-width: 98vw;
+    padding: 1rem;
+    margin: 0.5rem auto 2rem auto;
+    min-height: auto !important;
+    overflow: visible !important;
+    height: auto !important;
+    max-height: none !important;
+  }
+  
+  /* Wallpaper grid fixes */
+  .wallpaper-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+    padding: 1rem 0.5rem !important;
+  }
+  
+  .wallpaper-card {
+    max-width: 98vw !important;
+    padding: 0.8rem !important;
+  }
+}
+
+/* iPhone 12/13/14 Pro Max, iPhone 15 Pro Max */
+@media (max-width: 428px) {
+  .privacy-cards-container,
+  .terms-cards-container {
+    grid-template-columns: 1fr !important;
+    gap: 1.2rem !important;
+    padding: 1.2rem 0.8rem !important;
+  }
+  
+  .terms-card, .privacy-card {
+    max-width: 98vw !important;
+    padding: 1.2rem !important;
+    margin: 0.8rem auto 2.5rem auto !important;
+    min-height: auto !important;
+    overflow: visible !important;
+    height: auto !important;
+    max-height: none !important;
+  }
+  
+  .terms-info, .privacy-info {
+    font-size: 1.1rem !important;
+    line-height: 1.6 !important;
+    padding: 1rem !important;
+    margin-top: 0.5rem !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+  }
+  
+  .account-card {
+    max-width: 98vw !important;
+    padding: 1.2rem !important;
+    margin: 0.8rem auto 2.5rem auto !important;
+    min-height: auto !important;
+    overflow: visible !important;
+    height: auto !important;
+    max-height: none !important;
+  }
+  
+  /* Wallpaper grid fixes */
+  .wallpaper-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.2rem !important;
+    padding: 1.2rem 0.8rem !important;
+  }
+  
+  .wallpaper-card {
+    max-width: 98vw !important;
+    padding: 1rem !important;
+  }
+}
+
+/* General mobile fixes for all devices under 500px */
+@media (max-width: 500px) {
+  .privacy-cards-container,
+  .terms-cards-container {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+    padding: 1rem 0.5rem !important;
+  }
+  
+  .terms-card, .privacy-card {
+    max-width: 98vw !important;
+    padding: 1rem !important;
+    margin: 0.5rem auto 2rem auto !important;
+    min-height: auto !important;
+    overflow: visible !important;
+    height: auto !important;
+    max-height: none !important;
+  }
+  
+  .terms-info, .privacy-info {
+    font-size: 1rem !important;
+    line-height: 1.5 !important;
+    padding: 0.8rem !important;
+    margin-top: 0.3rem !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+  }
+  
+  .account-card {
+    max-width: 98vw !important;
+    padding: 1rem !important;
+    margin: 0.5rem auto 2rem auto !important;
+    min-height: auto !important;
+    overflow: visible !important;
+    height: auto !important;
+    max-height: none !important;
+  }
+  
+  /* Wallpaper grid fixes */
+  .wallpaper-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+    padding: 1rem 0.5rem !important;
+  }
+  
+  .wallpaper-card {
+    max-width: 98vw !important;
+    padding: 0.8rem !important;
+  }
+  
+  /* Account page specific fixes */
+  .welcome-user {
+    font-size: 1.2rem !important;
+    text-align: center !important;
+    margin: 1rem 0 !important;
+  }
+  
+  .logout-btn,
+  .stripe-pay {
+    width: 100% !important;
+    max-width: 90vw !important;
+    margin: 0.5rem auto !important;
+    padding: 0.8rem 1rem !important;
+    font-size: 1rem !important;
+  }
+  
+  /* Wallpaper grid header fixes */
+  .wallpaper-grid-header,
+  .header-bg {
+    padding: 1rem 0.5rem !important;
+    margin: 0 !important;
+  }
+  
+  .wallpaper-grid-header h1,
+  .header-bg h1 {
+    font-size: 1.8rem !important;
+    text-align: center !important;
+    margin: 0.5rem 0 !important;
+  }
+  
+  /* Category dropdown fixes */
+  .wallpapers-controls-bar {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 0.1rem !important;
+    padding: 0.3rem 0.4rem !important;
+  }
+  
+  .wallpapers-controls-bar select,
+  .wallpapers-controls-bar button {
+    width: 100% !important;
+    max-width: 90vw !important;
+    margin: 0.05rem 0 !important;
+  }
+}
+
+/* --- iPhone 12 Pro (390px width) fixes for wallpaper header and terms cards --- */
+@media (max-width: 400px) {
+  .wallpaper-grid-header, .header-bg, .wallpapers-page-header, .wallpaper-header {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    margin: 0 auto !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  .wallpaper-grid-header h1, .header-bg h1, .wallpapers-page-header h1, .wallpaper-header h1 {
+    font-size: 2.1rem !important;
+    text-align: center !important;
+    margin: 0 auto !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  .terms-card, .privacy-card {
+    max-width: 98vw !important;
+    margin: 1.2rem auto 2rem auto !important;
+    left: 0 !important;
+    right: 0 !important;
+    text-align: center !important;
+    align-items: center !important;
+    justify-content: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    box-sizing: border-box !important;
+    width: 95vw !important;
+    min-width: 0 !important;
+  }
+  .about-name {
+    text-align: center !important;
+    margin: 0 auto 1.2rem auto !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    display: block !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .terms-header, .privacy-header {
+    font-size: 1.15rem !important;
+    padding: 0.3rem 0.5rem !important;
+    text-align: center !important;
+    line-height: 1.3 !important;
+    margin: 0.5rem 0 0.5rem 0 !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .preview-title, .countdown-timer {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    margin: 0.7rem auto 0.7rem auto !important;
+    width: 100% !important;
+    max-width: 98vw !important;
+    padding: 0.5rem 0 !important;
+    word-break: break-word !important;
+    box-sizing: border-box !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .header-bg {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+  }
+  .preview-title, .countdown-timer {
+    width: auto !important;
+    max-width: 95vw !important;
+    text-align: center !important;
+    margin: 0.7rem auto 0.7rem auto !important;
+    padding: 0 !important;
+    word-break: break-word !important;
+    box-sizing: border-box !important;
+    display: block !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .about-name {
+    width: auto !important;
+    max-width: 95vw !important;
+    text-align: center !important;
+    margin: 0.7rem auto 0.7rem auto !important;
+    padding: 0 !important;
+    word-break: break-word !important;
+    box-sizing: border-box !important;
+    display: block !important;
+  }
+  .about-header {
+    width: auto !important;
+    max-width: 95vw !important;
+    text-align: center !important;
+    margin: 0.7rem auto 0.7rem auto !important;
+    padding: 0 !important;
+    word-break: break-word !important;
+    box-sizing: border-box !important;
+    display: block !important;
+  }
+  .about-info {
+    width: auto !important;
+    max-width: 95vw !important;
+    text-align: center !important;
+    margin: 0.7rem auto 0.7rem auto !important;
+    padding: 0 !important;
+    word-break: break-word !important;
+    box-sizing: border-box !important;
+    display: block !important;
+  }
+}
+
+@media (width: 1080px) and (height: 810px), (width: 810px) and (height: 1080px) {
+  /* Navbar: Dark, subtle gradient */
+  .retronix-navbar {
+    background: linear-gradient(90deg, #1a002b 0%, #2a003a 100%) !important;
+    border-bottom: 2px solid #a72d84 !important;
+    box-shadow: 0 2px 12px #1a002b88, 0 0 32px #2a003a44 !important;
+  }
+  /* Navbar: Hamburger menu - OVERRIDE ALL CONFLICTING STYLES */
+  .retronix-navbar-links {
+    display: none !important;
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    width: auto !important;
+    background: none !important;
+    flex-direction: unset !important;
+    align-items: unset !important;
+    gap: unset !important;
+    padding: unset !important;
+    box-shadow: none !important;
+    border-radius: unset !important;
+    opacity: unset !important;
+    pointer-events: unset !important;
+    transform: unset !important;
+    transition: unset !important;
+    z-index: unset !important;
+  }
+  .retronix-hamburger {
+    display: flex !important;
+  }
+  /* Navbar popup: Fully visible, dark, not overlapping */
+  .retronix-navbar-links.open {
+    display: flex !important;
+    flex-direction: column !important;
+    position: absolute !important;
+    top: 64px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: 90vw !important;
+    max-width: 420px !important;
+    min-width: 260px !important;
+    background: rgba(26,0,43,0.98) !important;
+    border: 2.5px solid #a72d84 !important;
+    border-radius: 18px !important;
+    box-shadow: 0 0 32px #a72d84, 0 0 64px #1a002b !important;
+    z-index: 1200 !important;
+    padding: 2rem 1.2rem !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 2rem !important;
+    max-height: 60vh !important;
+    overflow-y: auto !important;
+    margin: 0 !important;
+    opacity: 1 !important;
+    backdrop-filter: blur(8px) !important;
+    pointer-events: auto !important;
+  }
+  /* Wallpaper grid: 3 cards per row, 9 per page */
+  .wallpaper-grid-custom {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 2.2rem !important;
+    justify-items: center !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    max-width: 1200px !important;
+    margin: 0 auto 2.2rem auto !important;
+  }
+  /* Account page: Centered card */
+  .account-card {
+    margin: 6rem auto 2.5rem auto !important;
+    max-width: 520px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  /* 2 cards per row for Privacy and Terms pages */
+  .privacy-cards-container,
+  .terms-cards-container {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 2.2rem !important;
+    justify-items: center !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    max-width: 1200px !important;
+    margin: 0 auto 2.2rem auto !important;
+  }
+  /* About page: 2 cards in first row, 1 centered in second row */
+  .about-cards-container {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 2.2rem !important;
+    justify-items: center !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    max-width: 1200px !important;
+    margin: 0 auto 2.2rem auto !important;
+  }
+  .about-cards-container > *:nth-child(3) {
+    grid-column: 1 / span 2 !important;
+    justify-self: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  /* Pricing page: 2 cards per row */
+  .pricing-wrapper {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 2.2rem !important;
+    justify-items: center !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    max-width: 1200px !important;
+    margin: 0 auto 2.2rem auto !important;
+  }
+  /* Free tier wallpaper grid: 2 cards per row */
+  .wallpaper-grid--centered {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 2.2rem !important;
+    justify-items: center !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    max-width: 1200px !important;
+    margin: 0 auto 2.2rem auto !important;
+  }
+}
+
+/* =========================
+   ULTRA-SPECIFIC IPAD OVERRIDE
+   ========================= */
+/* BROADER IPAD MEDIA QUERY - COVERS ALL IPAD SIZES */
+@media (min-width: 768px) and (max-width: 1200px) and (orientation: landscape),
+       (min-width: 768px) and (max-width: 1200px) and (orientation: portrait) {
+  /* FORCE OVERRIDE ALL NAVBAR STYLES */
+  .retronix-navbar {
+    background: linear-gradient(90deg, #1a002b 0%, #2a003a 100%) !important;
+    border-bottom: 2px solid #a72d84 !important;
+    box-shadow: 0 2px 12px #1a002b88, 0 0 32px #2a003a44 !important;
+  }
+  
+  .retronix-navbar-inner {
+    justify-content: flex-end !important;
+    padding: 0.7rem 0.7rem 0.7rem 0.7rem !important;
+  }
+  
+  .retronix-navbar-links {
+    display: none !important;
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    width: auto !important;
+    background: none !important;
+    flex-direction: unset !important;
+    align-items: unset !important;
+    gap: unset !important;
+    padding: unset !important;
+    box-shadow: none !important;
+    border-radius: unset !important;
+    opacity: unset !important;
+    pointer-events: unset !important;
+    transform: unset !important;
+    transition: unset !important;
+    z-index: unset !important;
+  }
+  
+  .retronix-hamburger {
+    display: flex !important;
+  }
+  
+  .retronix-navbar-links.open {
+    display: flex !important;
+    flex-direction: column !important;
+    position: absolute !important;
+    top: 64px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: 90vw !important;
+    max-width: 420px !important;
+    min-width: 260px !important;
+    background: rgba(26,0,43,0.98) !important;
+    border: 2.5px solid #a72d84 !important;
+    border-radius: 18px !important;
+    box-shadow: 0 0 32px #a72d84, 0 0 64px #1a002b !important;
+    z-index: 1200 !important;
+    padding: 2rem 1.2rem !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 2rem !important;
+    max-height: 60vh !important;
+    overflow-y: auto !important;
+    margin: 0 !important;
+    opacity: 1 !important;
+    backdrop-filter: blur(8px) !important;
+    pointer-events: auto !important;
+  }
+  
+  /* FORCE OVERRIDE ALL GRID STYLES */
+  .wallpaper-grid-custom {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 2.2rem !important;
+    justify-items: center !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    max-width: 1200px !important;
+    margin: 0 auto 2.2rem auto !important;
+  }
+  
+  .account-card {
+    margin: 6rem auto 2.5rem auto !important;
+    max-width: 520px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  
+  .privacy-cards-container,
+  .terms-cards-container {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 2.2rem !important;
+    justify-items: center !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    max-width: 1200px !important;
+    margin: 0 auto 2.2rem auto !important;
+  }
+  
+  /* Portrait orientation: 1 card per row for Privacy and Terms */
+  @media (orientation: portrait) {
+    .privacy-cards-container,
+    .terms-cards-container {
+      grid-template-columns: repeat(1, 1fr) !important;
+    }
+  }
+  
+  .about-cards-container {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 2.2rem !important;
+    justify-items: center !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    max-width: 1200px !important;
+    margin: 0 auto 2.2rem auto !important;
+  }
+  
+  .about-cards-container > *:nth-child(3) {
+    grid-column: 1 / span 2 !important;
+    justify-self: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  
+  .pricing-wrapper {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 2.2rem !important;
+    justify-items: center !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    max-width: 1200px !important;
+    margin: 0 auto 2.2rem auto !important;
+  }
+  
+  .wallpaper-grid--centered {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 2.2rem !important;
+    justify-items: center !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    max-width: 1200px !important;
+    margin: 0 auto 2.2rem auto !important;
+  }
+}
+
+/* === FINAL MOBILE OVERRIDE - MUST BE LAST === */
+@media (max-width: 500px) {
+  .wallpaper-grid,
+  .wallpaper-grid-custom,
+  .wallpaper-grid--centered {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto !important;
+    gap: 1rem !important;
+    padding: 1rem 0.5rem !important;
+    max-width: 100vw !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    justify-items: center !important;
+    align-items: stretch !important;
+  }
+  
+  .wallpaper-card {
+    width: 100% !important;
+    max-width: 95vw !important;
+    min-width: 0 !important;
+    aspect-ratio: auto !important;
+    height: auto !important;
+    padding: 1rem 0.5rem !important;
+    margin: 0.5rem auto !important;
+  }
+}

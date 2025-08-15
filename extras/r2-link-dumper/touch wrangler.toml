@@ -1,0 +1,7 @@
+name = "r2-link-dumper"
+main = "retronix.js"
+compatibility_date = "2025-07-17"
+
+[[r2_buckets]]
+binding = "R2"
+bucket_name = "retronix-live"   # Replace with your actual bucket name

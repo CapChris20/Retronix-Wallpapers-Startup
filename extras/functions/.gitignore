@@ -1,0 +1,15 @@
+# JSON data files (Pro content)
+live_wallpapers.json
+static_wallpapers.json
+
+# Do not push premium assets
+Live Wallpapers/
+Static Wallpapers/
+
+# Firebase config (if secret)
+firebase.js
+
+# Node / build
+node_modules/
+dist/
+.env
