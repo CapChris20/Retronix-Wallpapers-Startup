@@ -1,0 +1,21 @@
+{
+  "name": "Retronix Wallpapers",
+  "short_name": "Retronix",
+  "description": "Free Retro & Vaporwave Wallpapers in 4K",
+  "start_url": "https://retronixwallpapers.com/",
+  "display": "standalone",
+  "background_color": "#0a001a",
+  "theme_color": "#ff00cc",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/brand-logo.PNG",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "categories": ["entertainment", "lifestyle", "utilities"],
+  "lang": "en",
+  "dir": "ltr"
+}

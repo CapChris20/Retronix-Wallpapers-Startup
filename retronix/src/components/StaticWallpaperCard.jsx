@@ -9,8 +9,9 @@ const StaticWallpaperCard = ({ wallpaper }) => {
     <div className="wallpaper-card" style={{ position: "relative" }}>
       <img
         src={imgSrc}
-        alt={wallpaper.title || "Wallpaper"}
+        alt={`${wallpaper.title || "Retro"} ${wallpaper.category || "vaporwave"} static wallpaper in 4K - nostalgic retro background`}
         className="wallpaper-image"
+        loading="lazy"
         onError={() => setImgSrc(fallbackImg)}
       />
       <a

@@ -1,11 +1,19 @@
 import React from 'react';
+import SEOHead from "../components/SEOHead";
+import { generatePageTitle, generatePageDescription, generateKeywords } from "../utils/seoUtils";
 
 
 function FAQ() {
   return (
     <div className="container no-top-pad">
+      <SEOHead
+        title={generatePageTitle('faq')}
+        description={generatePageDescription('faq')}
+        keywords={generateKeywords('faq')}
+        url="/faq"
+      />
 
-      <video autoPlay loop muted playsInline className="bg-video" preload="none" poster="/TODO-faq-poster.jpg">
+      <video autoPlay loop muted playsInline className="bg-video" preload="auto" poster="/TODO-faq-poster.jpg">
         <source src="/faq.mp4" type="video/mp4" />
       </video>
 

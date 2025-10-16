@@ -11,6 +11,8 @@ import LiveGrid from "../components/LiveGrid";
 import PremiumGrid from "../components/PremiumGrid";
 import Instructions from "../pages/Instructions";
 import WallpaperGridHeader from "../components/WallpaperGridHeader";
+import SEOHead from "../components/SEOHead";
+import { generatePageTitle, generatePageDescription, generateKeywords } from "../utils/seoUtils";
 import React from "react";
 
 function Wallpapers() {
@@ -110,6 +112,12 @@ function Wallpapers() {
         backgroundRepeat: 'no-repeat',
       }}
     >
+      <SEOHead
+        title={generatePageTitle('wallpapers')}
+        description={generatePageDescription('wallpapers')}
+        keywords={generateKeywords('wallpapers')}
+        url="/wallpapers"
+      />
       {/* HEADER */}
       <div className="header-bg" style={{ width: '100%', zIndex: 10, position: 'relative', margin: 0, padding: 0, marginTop: '3.5rem' }}>
         <WallpaperGridHeader

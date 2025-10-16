@@ -50,6 +50,22 @@ function LiveGrid({ filter = "all" }) {
   const handleCategoryChange = (e) => {
     setSelectedCategory(e.target.value);
     setPage(0);
+    // Ensure the dropdown doesn't block scrolling
+    e.target.blur();
+  };
+
+  // Handle dropdown focus to prevent scroll blocking
+  const handleDropdownFocus = (e) => {
+    // Allow scrolling when dropdown is focused
+    e.target.style.pointerEvents = 'auto';
+  };
+
+  // Handle dropdown blur to restore normal behavior
+  const handleDropdownBlur = (e) => {
+    // Restore normal behavior after selection
+    setTimeout(() => {
+      e.target.style.pointerEvents = 'auto';
+    }, 100);
   };
 
   if (loading) return <div className="loading">Loading wallpapers...</div>;
@@ -83,6 +99,8 @@ function LiveGrid({ filter = "all" }) {
           id="live-category-select"
           value={selectedCategory}
           onChange={handleCategoryChange}
+          onFocus={handleDropdownFocus}
+          onBlur={handleDropdownBlur}
           style={{
             padding: "1rem 2rem",
             borderRadius: "12px",
@@ -97,7 +115,9 @@ function LiveGrid({ filter = "all" }) {
             cursor: "pointer",
             minWidth: "200px",
             maxWidth: "90vw",
-            textAlign: "center"
+            textAlign: "center",
+            zIndex: 1000,
+            position: "relative"
           }}
         >
           <option value="all">All ⬇️</option>

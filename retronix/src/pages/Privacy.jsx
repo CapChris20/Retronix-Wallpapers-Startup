@@ -1,9 +1,17 @@
 // === src/pages/Privacy.jsx ===
 import React from "react";
+import SEOHead from "../components/SEOHead";
+import { generatePageTitle, generatePageDescription, generateKeywords } from "../utils/seoUtils";
 
 function Privacy() {
   return (
     <div className="privacy-bg-wrapper">
+      <SEOHead
+        title={generatePageTitle('privacy')}
+        description={generatePageDescription('privacy')}
+        keywords={generateKeywords('privacy')}
+        url="/privacy"
+      />
       <div className="privacy-page container no-top-pad">
         <div className="header-bg">
           <h1 className="about-name">Our Privacy Policies</h1>

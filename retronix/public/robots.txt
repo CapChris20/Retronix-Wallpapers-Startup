@@ -1,0 +1,30 @@
+User-agent: *
+Allow: /
+
+# Allow crawling of all pages
+Allow: /wallpapers
+Allow: /about
+Allow: /contact
+Allow: /faq
+Allow: /pricing
+Allow: /instructions
+Allow: /privacy
+Allow: /terms
+
+# Allow crawling of static assets
+Allow: /static_wallpapers.json
+Allow: /live_wallpapers.json
+Allow: /*.jpg
+Allow: /*.png
+Allow: /*.mp4
+
+# Disallow admin or private areas
+Disallow: /admin/
+Disallow: /private/
+Disallow: /api/
+
+# Sitemap location
+Sitemap: https://retronixwallpapers.com/sitemap.xml
+
+# Crawl delay (optional - be respectful to servers)
+Crawl-delay: 1

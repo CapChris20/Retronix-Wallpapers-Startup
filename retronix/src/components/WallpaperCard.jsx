@@ -1,19 +1,25 @@
 import React, { useRef, useState } from "react";
+import { handleVideoError } from "../utils/videoUtils";
+import { generateWallpaperAltText } from "../utils/seoUtils";
 
-const fallbackImg = "/fallback-thumb.png"; // Used if the main image fails to load
+const fallbackImg = "/brand-logo.PNG"; // Use existing brand logo as fallback
 
 const WallpaperCard = ({ wallpaper, compact }) => {
   const videoRef = useRef(null);
   const imgRef = useRef(null);
   
-  // Debug log to help diagnose issues
-  console.log('WallpaperCard rendering:', wallpaper.title, 'thumbnail:', wallpaper.thumbnail);
+  // Debug log to help diagnose issues (only in development)
+  if (process.env.NODE_ENV === 'development') {
+    console.log('WallpaperCard rendering:', wallpaper.title, 'thumbnail:', wallpaper.thumbnail);
+  }
 
   // Clean the thumbnail URL by removing trailing backslashes and ensuring it's valid
   const cleanThumbnailUrl = (url) => {
     if (!url) return fallbackImg;
     const cleaned = url.replace(/\\+$/, '').trim();
-    console.log('Cleaned URL:', url, '->', cleaned);
+    if (process.env.NODE_ENV === 'development') {
+      console.log('Cleaned URL:', url, '->', cleaned);
+    }
     return cleaned;
   };
 
@@ -29,7 +35,17 @@ const WallpaperCard = ({ wallpaper, compact }) => {
   };
 
   // Only show video if wallpaper.type === 'live' or wallpaper.preview is a video file
-  const isLive = wallpaper.type === 'live' || ((wallpaper.preview || wallpaper.url) && (wallpaper.preview || wallpaper.url).endsWith('.mp4'));
+  const isLive = wallpaper.type === 'live' || 
+                 (wallpaper.preview && wallpaper.preview.toLowerCase().endsWith('.mp4')) ||
+                 (wallpaper.url && wallpaper.url.toLowerCase().endsWith('.mp4'));
+
+  // Debug logging
+  if (process.env.NODE_ENV === 'development') {
+    console.log('Wallpaper:', wallpaper.title);
+    console.log('Preview URL:', wallpaper.preview);
+    console.log('Is Live:', isLive);
+    console.log('Has MP4:', wallpaper.preview && wallpaper.preview.toLowerCase().endsWith('.mp4'));
+  }
 
   // Always show the download button, even if download/url is missing
   const downloadUrl = wallpaper.download || wallpaper.url || '#';
@@ -94,18 +110,51 @@ const WallpaperCard = ({ wallpaper, compact }) => {
   // Force preload the image immediately
   React.useEffect(() => {
     if (imgRef.current && imgSrc) {
-      console.log('Preloading image:', imgSrc);
+      if (process.env.NODE_ENV === 'development') {
+        console.log('Preloading image:', imgSrc);
+      }
       imgRef.current.loading = "eager";
       imgRef.current.decoding = "sync";
       // Force the image to load
       const tempImg = new Image();
-      tempImg.onload = () => console.log('Image loaded successfully:', imgSrc);
-      tempImg.onerror = () => console.error('Image failed to load:', imgSrc);
+      tempImg.onload = () => {
+        if (process.env.NODE_ENV === 'development') {
+          console.log('Image loaded successfully:', imgSrc);
+        }
+      };
+      tempImg.onerror = () => {
+        if (process.env.NODE_ENV === 'development') {
+          console.log('Image failed to load:', imgSrc);
+        }
+      };
       tempImg.src = imgSrc;
     }
   }, [imgSrc]);
 
+  // Use the working Supabase preview URL instead of broken R2 URLs
   const [videoSrc, setVideoSrc] = useState(wallpaper.preview || wallpaper.url);
+  const [videoError, setVideoError] = useState(false);
+
+  // Check if plashURL is actually working (not a broken R2 URL)
+  const isPlashUrlWorking = (url) => {
+    if (!url) return false;
+    // If it's a retronixwallpapers.com URL that redirects to R2, it's likely broken
+    if (url.includes('retronixwallpapers.com/wallpaper.html') && url.includes('r2.dev')) {
+      return false;
+    }
+    return true;
+  };
+
+  // Handle video error using the utility function
+  const handleVideoLoadError = (errorEvent) => {
+    // If Supabase link fails and we have a working plashURL, try it
+    if (videoSrc && videoSrc.includes('supabase.co') && wallpaper.plashURL && isPlashUrlWorking(wallpaper.plashURL) && videoSrc !== wallpaper.plashURL) {
+      setVideoSrc(wallpaper.plashURL);
+    } else {
+      // Hide video and show error state
+      setVideoError(true);
+    }
+  };
 
   return (
     <div className="wallpaper-card" style={{ position: "relative", padding: "1.2rem 0.5rem", display: "flex", flexDirection: "column", alignItems: "center", height: compact ? "540px" : "480px", width: "380px", minWidth: "500px", maxWidth: "600px", boxSizing: "border-box" }}>
@@ -117,35 +166,38 @@ const WallpaperCard = ({ wallpaper, compact }) => {
           playsInline
           autoPlay
           className="wallpaper-video"
-          preload="auto"
+          preload="metadata"
+          loading="lazy"
           style={{
-            opacity: 1,
-            display: "block",
+            opacity: videoError ? 0 : 1,
+            display: videoError ? "none" : "block",
             width: "100%",
             objectFit: "cover",
             height: compact ? "400px" : "360px",
             flex: 1
           }}
-          onError={e => {
-            console.error('Video failed to load:', e.target.src);
-            // If Supabase link and plashURL exists, try plashURL
-            if (videoSrc && videoSrc.includes('supabase.co') && wallpaper.plashURL && videoSrc !== wallpaper.plashURL) {
-              setVideoSrc(wallpaper.plashURL);
-            } else {
-              e.target.style.display = 'none';
-            }
+          onError={(e) => handleVideoError(e, handleVideoLoadError)}
+          onLoadStart={() => {
+            // Reset error state when video starts loading
+            setVideoError(false);
           }}
         />
       ) : (
         <img
           ref={imgRef}
           src={imgSrc}
-          alt={wallpaper.title || "Wallpaper"}
+          alt={generateWallpaperAltText(wallpaper)}
           className="wallpaper-image"
-          loading="eager"
-          onLoad={() => console.log('Image loaded in DOM:', imgSrc)}
+          loading="lazy"
+          onLoad={() => {
+            if (process.env.NODE_ENV === 'development') {
+              console.log('Image loaded in DOM:', imgSrc);
+            }
+          }}
           onError={() => {
-            console.error('Image failed to load in DOM:', imgSrc);
+            if (process.env.NODE_ENV === 'development') {
+              console.log('Image failed to load in DOM:', imgSrc);
+            }
             setImgSrc(fallbackImg);
           }}
           style={{ 
@@ -158,6 +210,23 @@ const WallpaperCard = ({ wallpaper, compact }) => {
           }}
         />
       )}
+      
+      {/* Show fallback image if video fails */}
+      {isLive && videoError && (
+        <img
+          src={imgSrc}
+          alt={generateWallpaperAltText(wallpaper)}
+          style={{ 
+            opacity: 1, 
+            display: "block",
+            width: "100%",
+            objectFit: "cover",
+            height: compact ? "400px" : "360px",
+            flex: 1
+          }}
+        />
+      )}
+      
       {/* Button group always inside the card */}
       <div
         style={{
@@ -188,22 +257,22 @@ const WallpaperCard = ({ wallpaper, compact }) => {
         >
           Download
         </a>
-        {/* Removed fallback sentence */}
+        {/* Only show copy link button if plashURL exists and is working */}
         <button
           style={{
-            ...retroNeonBtnStyle(copyHover, wallpaper.plashURL === '#', true),
+            ...retroNeonBtnStyle(copyHover, !isPlashUrlWorking(wallpaper.plashURL), true),
             minHeight: "38px",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            visibility: ((wallpaper.type === 'live' || (wallpaper.preview && wallpaper.preview.endsWith('.mp4'))) && wallpaper.plashURL) ? "visible" : "hidden"
+            visibility: ((wallpaper.type === 'live' || (wallpaper.preview && wallpaper.preview.endsWith('.mp4'))) && isPlashUrlWorking(wallpaper.plashURL)) ? "visible" : "hidden"
           }}
           onClick={() => handleCopyPlash(wallpaper.plashURL)}
           type="button"
           title="Copy Plash Link to clipboard"
           onMouseEnter={() => setCopyHover(true)}
           onMouseLeave={() => setCopyHover(false)}
-          disabled={!((wallpaper.type === 'live' || (wallpaper.preview && wallpaper.preview.endsWith('.mp4'))) && wallpaper.plashURL)}
+          disabled={!((wallpaper.type === 'live' || (wallpaper.preview && wallpaper.preview.endsWith('.mp4'))) && isPlashUrlWorking(wallpaper.plashURL))}
         >
           Copy Link - Mac User
         </button>

@@ -1,8 +1,16 @@
 import React from "react";
+import SEOHead from "../components/SEOHead";
+import { generatePageTitle, generatePageDescription, generateKeywords } from "../utils/seoUtils";
 
 const Instructions = () => {
   return (
     <div className="instructions-bg-wrapper">
+      <SEOHead
+        title={generatePageTitle('instructions')}
+        description={generatePageDescription('instructions')}
+        keywords={generateKeywords('instructions')}
+        url="/instructions"
+      />
       <div className="instructions-page container no-top-pad">
         <div className="header-bg">
           <h1 className="faqs-name">How to Set Wallpaper</h1>

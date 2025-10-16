@@ -5,14 +5,23 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && cp _redirects dist/",
+    "build": "vite build && cp _redirects dist/ && node scripts/generate-sitemap.js && node scripts/generate-robots.js",
+    "build:seo": "vite build && cp _redirects dist/ && node scripts/generate-sitemap.js && node scripts/generate-robots.js",
+    "build:prerender": "vite build && cp _redirects dist/ && node scripts/generate-sitemap.js && node scripts/generate-robots.js && react-snap",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "sitemap": "node scripts/generate-sitemap.js",
+    "robots": "node scripts/generate-robots.js"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.57.4",
+    "firebase": "^12.1.0",
+    "lucide-react": "^0.540.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "react-router-dom": "^7.6.0"
+    "react-hot-toast": "^2.6.0",
+    "react-router-dom": "^7.6.0",
+    "react-helmet-async": "^2.0.5"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",
@@ -23,6 +32,45 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.19",
     "globals": "^16.0.0",
-    "vite": "^6.3.5"
+    "vite": "^6.3.5",
+    "react-snap": "^1.23.0"
+  },
+  "reactSnap": {
+    "source": "dist",
+    "destination": "dist",
+    "include": [
+      "/",
+      "/about",
+      "/contact",
+      "/faq",
+      "/pricing",
+      "/instructions",
+      "/privacy",
+      "/terms",
+      "/wallpapers"
+    ],
+    "skipThirdPartyRequests": true,
+    "cacheAjaxRequests": false,
+    "preloadImages": false,
+    "fixWebpackChunksIssue": false,
+    "inlineCss": true,
+    "minifyHtml": {
+      "collapseWhitespace": true,
+      "removeComments": true,
+      "removeRedundantAttributes": true,
+      "removeScriptTypeAttributes": true,
+      "removeStyleLinkTypeAttributes": true,
+      "useShortDoctype": true
+    },
+    "puppeteerArgs": [
+      "--no-sandbox",
+      "--disable-setuid-sandbox",
+      "--disable-dev-shm-usage",
+      "--disable-accelerated-2d-canvas",
+      "--no-first-run",
+      "--no-zygote",
+      "--single-process",
+      "--disable-gpu"
+    ]
   }
 }

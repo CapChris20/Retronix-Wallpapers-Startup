@@ -1,10 +1,18 @@
 
 // === src/pages/Terms.jsx ===
 import React from "react";
+import SEOHead from "../components/SEOHead";
+import { generatePageTitle, generatePageDescription, generateKeywords } from "../utils/seoUtils";
 
 function Terms() {
   return (
     <div className="terms-bg-wrapper">
+      <SEOHead
+        title={generatePageTitle('terms')}
+        description={generatePageDescription('terms')}
+        keywords={generateKeywords('terms')}
+        url="/terms"
+      />
       <div className="terms-page container no-top-pad">
         <div className="header-bg">
           <h1 className="about-name">Terms of Service</h1>

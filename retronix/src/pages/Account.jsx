@@ -67,6 +67,7 @@ function Account() {
         email: user.email, // store email
         name: user.displayName || "Anonymous", // store name
         subscription: "Free", // default free tier
+        tier: "none", // ensure tier field exists
       },
       { merge: true } // merge with existing data
     );

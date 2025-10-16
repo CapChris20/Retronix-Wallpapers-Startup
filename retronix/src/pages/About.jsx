@@ -1,9 +1,29 @@
 import React from "react";
+import SEOHead from "../components/SEOHead";
+import { generatePageTitle, generatePageDescription, generateKeywords } from "../utils/seoUtils";
 
 function About() {
   return (
     <div className="container no-top-pad">
-      <video autoPlay loop muted playsInline className="bg-video" preload="none" poster="/TODO-about-poster.jpg">
+      <SEOHead
+        title={generatePageTitle('about')}
+        description={generatePageDescription('about')}
+        keywords={generateKeywords('about')}
+        url="/about"
+      />
+      <video 
+        autoPlay 
+        loop 
+        muted 
+        playsInline 
+        className="bg-video" 
+        preload="auto" 
+        poster="/TODO-about-poster.jpg"
+        onError={(e) => console.error('About video error:', e)}
+        onLoadStart={() => console.log('About video loading...')}
+        onCanPlay={() => console.log('About video can play')}
+        onPlay={() => console.log('About video started playing')}
+      >
         <source src="/about.mp4" type="video/mp4" />
       </video>
 

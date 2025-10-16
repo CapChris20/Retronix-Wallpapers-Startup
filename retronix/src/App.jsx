@@ -5,6 +5,8 @@ import { Routes, Route } from 'react-router-dom';
 import Navbar from "./components/Navbar";
 // Import the Footer component
 import Footer from './components/Footer';
+// Import HelmetProvider for SEO
+import { HelmetProvider } from 'react-helmet-async';
 
 // Replace static imports with React.lazy
 const Home = lazy(() => import("./pages/Home"));
@@ -28,29 +30,31 @@ function LoadingSpinner() {
 
 function App() {
   return (
-    <div className="app-content">
-      <Navbar />
-      <main>
-        <Suspense fallback={<LoadingSpinner />}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/faq" element={<FAQ />} />
-          <Route path="/pricing" element={<Pricing />} />
-          <Route path="/wallpapers" element={<Wallpapers />} />
-          <Route path="/login" element={<Account />} />
-          <Route path="/success" element={<Success />} />
-          <Route path="/terms" element={<Terms />} />
-          <Route path="/instructions" element={<Instructions />} />
-          <Route path="/privacy" element={<Privacy />} />
-          <Route path="/forgot-password" element={<ForgetPassword />} />
-          <Route path="/auth-action" element={<AuthAction />} />
-        </Routes>
-        </Suspense>
-      </main>
-      <Footer />
-    </div>
+    <HelmetProvider>
+      <div className="app-content">
+        <Navbar />
+        <main>
+          <Suspense fallback={<LoadingSpinner />}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/faq" element={<FAQ />} />
+            <Route path="/pricing" element={<Pricing />} />
+            <Route path="/wallpapers" element={<Wallpapers />} />
+            <Route path="/login" element={<Account />} />
+            <Route path="/success" element={<Success />} />
+            <Route path="/terms" element={<Terms />} />
+            <Route path="/instructions" element={<Instructions />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/forgot-password" element={<ForgetPassword />} />
+            <Route path="/auth-action" element={<AuthAction />} />
+          </Routes>
+          </Suspense>
+        </main>
+        <Footer />
+      </div>
+    </HelmetProvider>
   );
 }
 

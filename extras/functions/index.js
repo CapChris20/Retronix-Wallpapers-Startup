@@ -324,6 +324,49 @@ app.post("/create-checkout-session", async (req, res) => {
   }
 });
 
+// === Get Monthly Donation Total ===
+app.get("/api/monthly-donations", async (req, res) => {
+  try {
+    const currentMonth = new Date().toISOString().slice(0, 7); // YYYY-MM format
+    const startOfMonth = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
+    const endOfMonth = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0, 23, 59, 59, 999);
+    
+    console.log(`📊 Getting donations for ${currentMonth}`);
+    
+    // Query donations for current month
+    const donationsSnapshot = await db.collection("gaza_donations")
+      .where("timestamp", ">=", startOfMonth)
+      .where("timestamp", "<=", endOfMonth)
+      .get();
+    
+    let totalDonations = 0;
+    let totalRevenue = 0;
+    
+    donationsSnapshot.forEach(doc => {
+      const data = doc.data();
+      totalDonations += data.donationAmount || 0;
+      totalRevenue += data.totalAmount || 0;
+    });
+    
+    console.log(`✅ Monthly totals: $${totalDonations.toFixed(2)} donations, $${totalRevenue.toFixed(2)} revenue`);
+    
+    res.json({
+      success: true,
+      month: currentMonth,
+      totalDonations: parseFloat(totalDonations.toFixed(2)),
+      totalRevenue: parseFloat(totalRevenue.toFixed(2)),
+      donationCount: donationsSnapshot.size
+    });
+    
+  } catch (error) {
+    console.error("❌ Monthly donations error:", error);
+    res.status(500).json({ 
+      success: false, 
+      error: "Failed to get monthly donations: " + error.message 
+    });
+  }
+});
+
 // === Export Express app as Firebase function ===
 exports.api = functions.https.onRequest(app);
 

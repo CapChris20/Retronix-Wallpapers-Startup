@@ -5,6 +5,8 @@ import { getAuth, onAuthStateChanged } from "firebase/auth"; // Firebase authent
 import { db } from "../firebase/firebase"; // import initialized Firestore database
 import { doc, getDoc } from "firebase/firestore"; // Firestore document methods for reading user tier data
 import ConfirmModal from '../components/ConfirmModal'; // import your reusable modal componentimport React from "react";
+import SEOHead from "../components/SEOHead";
+import { generatePageTitle, generatePageDescription, generateKeywords } from "../utils/seoUtils";
 import React from "react";
 
 function Pricing() { // functional React component named Pricing
@@ -47,7 +49,7 @@ function Pricing() { // functional React component named Pricing
         return; // prevent re-purchasing
       }
 
-      const response = await fetch("https://api-yxidj5clqa-uc.a.run.app/create-checkout-session", {
+      const response = await fetch("/.netlify/functions/create-checkout-session", {
         method: "POST", // use POST to send subscription request
         headers: { "Content-Type": "application/json" }, // specify JSON headers
         body: JSON.stringify({ uid, tier }), // send uid and selected tier to backend
@@ -68,7 +70,13 @@ function Pricing() { // functional React component named Pricing
   };
 
   return (
-    <div className="pricing-page" style={{ paddingTop: '7rem' }}> {/* container for the pricing page with top padding for spacing */}
+    <div className="pricing-page" style={{ paddingTop: '7rem' }}>
+      <SEOHead
+        title={generatePageTitle('pricing')}
+        description={generatePageDescription('pricing')}
+        keywords={generateKeywords('pricing')}
+        url="/pricing"
+      /> {/* container for the pricing page with top padding for spacing */}
       <div className="header-bg"> {/* header background wrapper */}
         <h1 className="pricing-name"> Our Subscription Tiers</h1> {/* page title */}
       </div>

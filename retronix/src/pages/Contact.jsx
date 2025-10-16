@@ -1,4 +1,6 @@
 import React from "react";
+import SEOHead from "../components/SEOHead";
+import { generatePageTitle, generatePageDescription, generateKeywords } from "../utils/seoUtils";
 
 function Contact() {
   return (
@@ -15,7 +17,13 @@ function Contact() {
         display: "block"
       }}
     >
-      <video autoPlay loop muted playsInline className="bg-video" preload="none" poster="/TODO-contact-poster.jpg">
+      <SEOHead
+        title={generatePageTitle('contact')}
+        description={generatePageDescription('contact')}
+        keywords={generateKeywords('contact')}
+        url="/contact"
+      />
+      <video autoPlay loop muted playsInline className="bg-video" preload="auto" poster="/TODO-contact-poster.jpg">
         <source src="/contact.mp4" type="video/mp4" />
       </video>
 
