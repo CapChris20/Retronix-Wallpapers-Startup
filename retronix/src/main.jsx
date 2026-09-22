@@ -4,6 +4,7 @@ import App from './App.jsx';
 import { BrowserRouter } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast'; // ✅ Add Toaster import
 import './index.css';
+import './polish.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
