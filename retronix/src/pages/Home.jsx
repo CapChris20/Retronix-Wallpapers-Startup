@@ -107,19 +107,21 @@ function Home() { /* Declare the Home component */
         <h1 className="brand-name">RETRONIX</h1> {/* Main brand title */}
         <p className="slogan"> 4K Retro & Vaporwave Backgrounds! All one grid.</p> {/* Brand slogan */}
 
-        <div
+        <button
+          type="button"
+          aria-label="Explore free wallpapers"
           className="scroll-icon" /* Container for scroll icon */
           onClick={() => { /* On click, scroll down smoothly to wallpaper preview section */
             const section = document.querySelector(".wallpaper-preview-section"); /* Find target section */
-            section?.scrollIntoView({ behavior: "smooth" }); /* Smooth scroll into view */
+            section?.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" }); /* Smooth scroll into view */
           }}
           style={{ cursor: "pointer", display: "flex", flexDirection: "column", alignItems: "center" }} /* Centered column with pointer cursor */
         >
           {!hideScrollHeader && ( /* Only show header if not hidden on scroll */
-            <h2 className="scroll-header" style={{ fontSize: "1rem", margin: "0.25rem 0", color: "#ff99cc", textShadow: "1px 1px #bf00ff" }}> Click Arrow for More</h2>
+            <span className="scroll-header" style={{ fontSize: "1rem", margin: "0.25rem 0", color: "#ff99cc", textShadow: "1px 1px #bf00ff" }}>Explore free wallpapers</span>
           )}
-          <ChevronDown className="bounce" size={65} color="cyan" /> {/* Down arrow icon with bounce animation */}
-        </div>
+          <ChevronDown className="bounce" size={32} color="cyan" />
+        </button>
       </div>
 
       {/* Gaza Aid Pledge Section */}

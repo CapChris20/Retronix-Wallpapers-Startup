@@ -9,8 +9,9 @@ function Navbar() {
   const handleLinkClick = () => setMenuOpen(false);
 
   return (
-    <nav className="retronix-navbar">
+    <nav className="retronix-navbar" aria-label="Main navigation">
       <div className="retronix-navbar-inner">
+        <Link to="/" className="nav-brand" onClick={handleLinkClick}>RETRONIX<span>WALLPAPERS</span></Link>
         {/* Hamburger for mobile */}
         <button
           className={`retronix-hamburger${menuOpen ? ' open' : ''}`}
@@ -35,6 +36,7 @@ function Navbar() {
           >
             Home
           </Link>
+          <Link to="/wallpapers" className={`retronix-nav-link${location.pathname === "/wallpapers" ? " active" : ""}`} onClick={handleLinkClick}>Wallpapers</Link>
           <Link
             to="/about"
             className={`retronix-nav-link${location.pathname === '/about' ? ' active' : ''}`}
